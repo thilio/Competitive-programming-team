@@ -26,58 +26,54 @@ typedef pair<ll,ll> pll;
 const int INF = 0x3f3f3f3f;
 const ll llINF = 0x3f3f3f3f3f3f3f;
 const int MOD = 1e9+7;
-
-ll g[200200];
-ll somal[200200];
-ll somar[200200];
-ll s[200200];
+int n,g;
+vi lost;
 
 int main(){
 
 	fastio;
-
-	ll n;
-	cin >> n;
-
-	fr(i,n){
-		cin >> g[i] >> s[i];
-	}
-
-	ll mx = INF;
-
-	bool ok = false;
-
-	fr(i,n){
-		if(g[i] > mx) ok = true;
-
-		somal[i] = min(mx - g[i], s[i]);
-		mx = g[i] + somal[i] + 1;
-	}
-
-	mx = INF;
-
-	for(int i = n - 1; i >= 0; i--){
-		if(g[i] > mx) ok = true;
-		somar[i] = min(s[i], mx - g[i]);
-		mx = g[i] + somar[i] + 1;
-	}
-
-	if(ok) cout << -1 << endl;
-	else{
-		ll area = 0;
-
+	while(cin >> n >> g){
+		lost.clear();
+		int draw = 0;
+		int ans = 0;
 		fr(i,n){
-			area += min(somar[i],somal[i]);
-			g[i] += min(somar[i],somal[i]);
+			int s;
+			int r;
+			cin >> s >> r;
+			if(s > r) ans += 3;
+			if(s == r){
+				ans++;
+				draw++;
+			}
+			if(s < r){
+				lost.pb(r - s);
+			}
 		}
 
-		cout << area << endl;
-
-		fr(i,n){
-			cout << g[i] << ' ';
+		if(g <= draw){
+			ans += 2*g;
+			cout << ans << endl;
+			continue;
 		}
-		gnl;
+
+		g-= draw;
+		ans += 2*draw;
+
+		sort(all(lost));
+
+		for(auto x: lost){
+			if(g < x) break;
+			if(g == x){
+				ans++;
+				g = 0;
+			}
+			else{
+				g -= x + 1;
+				ans += 3;
+			}
+		}
+
+		cout << ans << endl;
 	}
-
-
 }
+
