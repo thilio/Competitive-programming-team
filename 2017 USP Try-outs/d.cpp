@@ -1,95 +1,152 @@
-#include<bits/stdc++.h>
-
+#include "bits/stdc++.h"
 using namespace std;
 
-#define fr(i, n) for(int i = 0; i < n; i++)
-#define frr(i, n) for(int i = 1; i <= n; i++)
-#define frm(i, n) for(int i = n-1; i >= 0; i--)
-
 #define pb push_back
-#define f first
-#define s second
-#define eps 0.00000000000000001
+#define mp make_pair
+#define fst first
+#define snd second
 
+#define fr(i,n) 	for(int i=0;i<n;i++)
+#define frr(i,n)	for(int i=1;i<=n;i++)
 
-typedef long long ll;
-typedef pair<int,int> pii;
-typedef pair<ll, ll> pll;
-typedef pair<double, double> ponto;
-typedef vector<vector<ll>> matrix;
+#define ms(x,i)	memset(x,i,sizeof(x))
+#define dbg(x)	cout << #x << " = " << x << endl
+#define all(x)	x.begin(),x.end()
 
-#define mem(v, k) memset(v, k, sizeof(v));
-
-#define db cout << "Debug" << endl;
-
+#define gnl cout << endl
+#define olar cout << "olar" << endl
 #define fastio ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 
-#define mp make_pair
-#define pq priority_queue
+typedef long long int ll;
+typedef long double ld;
+typedef pair<ld,ld> pld;
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+typedef vector<pii> vii;
+typedef pair<ll,ll> pll;
 
-#define mx(a, b) a = max(a, b);
-#define mod(a, b) a = a%b;
+const int INF = 0x3f3f3f3f;
+const ll llINF = 0x3f3f3f3f3f3f3f;
+const int MOD = 1e9+7;
+const ld EPS = 1e-18;
 
-#define MAXN 100010
-#define MOD 1000000007
-#define MAXL 30
-#define ROOT 1
-#define INF 1000000000000000100
+vector<pair<ld,ld>> v;
 
-pair<double, double> line[MAXN];
-pair<double, double> intersec(pair<double, double> a, pair<double, double> b){
-	if(abs(a.f - b.f) < eps){
-		return {INF, INF};
-	}
-	double x = (a.s - b.s)/(a.f - b.f);
-	return {x, x*a.f + a.s};
+bool is(ld a){
+	if(a < EPS && a > -EPS) return true;
+	return false;
 }
 
-int n;
-pair<double, double> ord(){
-	double maximo = -INF, minimo = INF;
-	sort(line + 1, line + n + 1);
-	for(int i = 1; i < n; i++){
-		pair<double, double> pt = intersec(line[i], line[i+1]);
-
-		if(abs(pt.f - INF) > eps){
-			minimo = min(pt.f, minimo);
-		}
-	}
-	frr(i, n) line[i].s *= -1;
-	sort(line + 1, line + n + 1);
-	frr(i, n) line[i].s *= -1;
-
-	for(int i = 1; i < n; i++){
-		pair<double, double> pt = intersec(line[i], line[i+1]);
-
-		if(abs(pt.f - INF) > eps){
-			maximo = max(pt.f, maximo);
-		}
-	}
-
-
-	return {maximo, minimo};
+bool get(pld a,pld b, pld &c){
+	if(is(a.fst - b.fst)) return false;
+	c.fst = (b.snd - a.snd)/(a.fst - b.fst);
+	c.snd = a.fst*c.fst + a.snd;
+	return true;
 }
 
-void read(){
-	cin >> n;
-	frr(i, n) cin >> line[i].f >> line[i].s;
+bool comp1(pld a, pld b){
+	if(!is(a.fst - b.fst)){
+		if(a.fst < b.fst) return true;
+		else return false;
+	}
+	return a.snd < b.snd;
 }
+
+bool comp2(pld a, pld b){
+	if(!is(a.fst - b.fst)){
+		if(a.fst < b.fst) return false;
+		return true;
+	}
+	return a.snd < b.snd;
+}
+
 
 int main(){
+
 	fastio;
+
+	cout << setprecision(9) << fixed;
+
+	int n;
 	cin >> n;
-	frr(i, n) cin >> line[i].f >> line[i].s;
-	pair<double, double> x = ord();
-
-	frr(i, n){
-		line[i].s = -line[i].s/line[i].f;
-		line[i].f = (double)1/line[i].f;
+	v.resize(n);
+	fr(i,n){ 
+		cin >> v[i].fst >> v[i].snd;
+		v[i].snd = -v[i].snd;
 	}
-	pair<double, double> y = ord();
-	cout << fixed; 
-	cout << setprecision(8);
-	cout << x.s <<" " << y.s << " " << x.f <<" " << y.f << endl;
 
+	pld aux;
+
+	ld xmax,xmin,ymax,ymin;
+	bool xma,xmi,yma,ymi;
+	xma = xmi = yma = ymi = false;
+
+	sort(all(v),comp1);
+	for(int i = 0; i < n - 1; i++){
+		if(xma == false){
+			if(get(v[i],v[i + 1], aux)){
+				xma = true;
+				xmax = aux.fst;
+			}
+		}
+		else{
+			if(get(v[i],v[i + 1], aux)){
+				xmax = max(xmax, aux.fst);
+			}
+
+		}
+	}
+
+	sort(all(v),comp2);
+	for(int i = 0; i < n - 1; i++){
+		if(xmi == false){
+			if(get(v[i],v[i + 1], aux)){
+				xmi = true;
+				xmin = aux.fst;
+			}
+		}
+		else{
+			if(get(v[i],v[i + 1], aux)){
+				xmin = min(xmin, aux.fst);
+			}
+		}
+	}
+
+	fr(i,v.size()){
+		v[i].fst /= (v[i].fst)*(v[i].fst);
+		v[i].snd = -v[i].snd*v[i].fst;
+	}
+
+	sort(all(v),comp1);
+	for(int i = 0; i < n - 1; i++){
+		if(yma == false){
+			if(get(v[i],v[i + 1], aux)){
+				yma = true;
+				ymax = aux.fst;
+			}
+		}
+		else{
+			if(get(v[i],v[i + 1], aux)){
+				ymax = max(ymax, aux.fst);
+			}
+
+		}
+	}
+
+	sort(all(v),comp2);
+	for(int i = 0; i < n - 1; i++){
+		if(ymi == false){
+			if(get(v[i],v[i + 1], aux)){
+				ymi = true;
+				ymin = aux.fst;
+			}
+		}
+		else{
+			if(get(v[i],v[i + 1], aux)){
+				ymin = min(ymin, aux.fst);
+			}
+		}
+	}
+
+	cout << xmin << ' ' << ymin << ' ' << xmax << ' ' << ymax << endl;
 }

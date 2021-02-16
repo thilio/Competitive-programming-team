@@ -22,46 +22,42 @@ typedef vector<pii> vii;
 
 const int INF = 0x3f3f3f3f;
 const ll llINF = (long long)(1e18) + 100;   
-const int MAXN = 1e5 + 10;
-
-int n, m;
-bool disj[1123][1123];
-vi adj[1123];
+const int MAXN = 1e4 + 10;
 
 int32_t main(){
 	ios_base::sync_with_stdio(false); cin.tie(NULL);
+	int n, v[MAXN];
 
-	while (cin>>n){
-		cin>>m;
+	cin>>n;
+	fr(i, n)
+		cin>>v[i];
 
-		frr(i, n){
-			adj[i].clear();
-			frr(j, n)
-				disj[i][j] = 0;
+	int p = n; // começa a segunda parte	
+
+	for (int i = 1; i < n; i++)
+		if (v[i] < v[i - 1]){ // achei começo
+			p = i;
+			break;
 		}
 
-		int a, b;
-		fr(i, m){
-			cin>>a>>b;
-			adj[b].pb(a);
-		}
+	vi a;
+	
+	for (int i = p; i < n; i++)
+		a.pb(v[i]);
 
-		for (int v = 2; v <= n; v++){
-			disj[v][1] = 1;
-			disj[1][v] = 1;
+	for (int i = 0; i < p; i++)
+		a.pb(v[i]);
 
-			for (auto u : adj[v])
-				for (int w = 1; w < v; w++)
-					if (disj[u][w]){
-						disj[v][w] = 1;
-						disj[w][v] = 1;
-					}
-		}
-		int ans = 0;
-		
-		frr(i, n)
-			frr(j, n)
-				ans += disj[i][j];
-		cout<<ans/2<<endl;			
-	}
+	bool srt = 1;		
+
+	for (int i = 1; i < n; i++)
+		if (a[i] < a[i - 1])
+			srt = 0;	
+
+	if (srt)
+		cout<<"Phew"<<endl;
+	else
+		cout<<"Lie"<<endl;		
+
+
 }

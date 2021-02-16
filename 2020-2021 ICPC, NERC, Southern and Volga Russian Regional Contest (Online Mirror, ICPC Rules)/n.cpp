@@ -26,54 +26,31 @@ typedef pair<ll,ll> pll;
 const int INF = 0x3f3f3f3f;
 const ll llINF = 0x3f3f3f3f3f3f3f;
 const int MOD = 1e9+7;
-int n,g;
-vi lost;
 
 int main(){
 
 	fastio;
-	while(cin >> n >> g){
-		lost.clear();
-		int draw = 0;
-		int ans = 0;
-		fr(i,n){
-			int s;
-			int r;
-			cin >> s >> r;
-			if(s > r) ans += 3;
-			if(s == r){
-				ans++;
-				draw++;
+
+	int T;
+	cin >> T;
+	while(T--){
+			int c[10];
+			int a[10];
+			frr(i,3) cin >> c[i];
+			frr(i,5) cin >> a[i];
+
+			frr(i,3) c[i] -= a[i];
+
+			if(c[1] < 0 || c[2] < 0 || c[3] < 0){
+				cout << "NO" << endl;
+				continue;
 			}
-			if(s < r){
-				lost.pb(r - s);
-			}
-		}
 
-		if(g <= draw){
-			ans += 2*g;
-			cout << ans << endl;
-			continue;
-		}
+			a[4] = max(0, a[4] - c[1]);
+			a[5] = max(0, a[5] - c[2]);
 
-		g-= draw;
-		ans += 2*draw;
-
-		sort(all(lost));
-
-		for(auto x: lost){
-			if(g < x) break;
-			if(g == x){
-				ans++;
-				g = 0;
-			}
-			else{
-				g -= x + 1;
-				ans += 3;
-			}
-		}
-
-		cout << ans << endl;
+			if(a[4] + a[5] <= c[3]) cout << "YES" << endl;
+			else cout << "NO" << endl;
 	}
-}
 
+}

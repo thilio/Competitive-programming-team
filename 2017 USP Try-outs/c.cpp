@@ -1,181 +1,154 @@
-#include<bits/stdc++.h>
-
+#include "bits/stdc++.h"
 using namespace std;
 
-#define fr(i, n) for(int i = 0; i < n; i++)
-#define frr(i, n) for(int i = 1; i <= n; i++)
-#define frm(i, n) for(int i = n-1; i >= 0; i--)
-
 #define pb push_back
-#define f first
-#define s second
+#define mp make_pair
+#define fst first
+#define snd second
 
-typedef long long ll;
-typedef pair<int,int> pii;
-typedef pair<ll, ll> pll;
-typedef pair<double, double> ponto;
-typedef vector<vector<ll>> matrix;
+#define fr(i,n) 	for(int i=0;i<n;i++)
+#define frr(i,n)	for(int i=1;i<=n;i++)
 
-#define mem(v, k) memset(v, k, sizeof(v));
+#define ms(x,i)	memset(x,i,sizeof(x))
+#define dbg(x)	cout << #x << " = " << x << endl
+#define all(x)	x.begin(),x.end()
 
-#define db cout << "Debug" << endl;
-
+#define gnl cout << endl
+#define olar cout << "olar" << endl
 #define fastio ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 
-#define mp make_pair
-#define pq priority_queue
+typedef long long int ll;
+typedef pair<int,int> pii;
+typedef vector<int> vi;
+typedef vector<pii> vii;
+typedef pair<ll,ll> pll;
 
-#define mx(a, b) a = max(a, b);
-#define mod(a, b) a = a%b;
+const int INF = 0x3f3f3f3f;
+const ll llINF = 0x3f3f3f3f3f3f3f;
+const int MOD = 1e9+7;
+int n,m;
+int sprime[500500]; //sprime[i] = smallest prime that divides i
+int v[500500];
+vi prime[500500]; // prime factorization of each element
+vi divi[500500]; // divisors
+int pr[500500]; // first number before i that it is coprime with i
+vi L[500500]; // L[i] = indices j such that i divides v[j]; 
 
-#define MAXN 500010
-#define MOD 1000000007
-#define MAXL 30
-#define ROOT 1
-#define INF 1000000000000000100
+int seg[2000200];
 
-int n, m, r;
-int a[MAXN];
-vector<pii> Div[MAXN]; /*Div[i] são os Divisores de a[i]*/
+void update(int node,int l,int r,int pos,int val){
+	if(l > pos || pos > r) return;
+	if(l == r){
+		seg[node] = val;
+		return;
+	}
+	int m = (l + r)/2;
+	update(2*node,l,m,pos,val);
+	update(2*node + 1,m+1,r,pos,val);
+	seg[node] = max(seg[2*node], seg[2*node + 1]);
+}
+int query(int node,int l,int r,int a,int b){
+	if(b < l || a > r) return -1;
+	if(a <= l && r <= b) return seg[node];
+	int m = (l + r)/2;
+	int q1 = query(2*node,l,m,a,b);
+	int q2 = query(2*node + 1,m + 1,r,a,b);
+	return max(q1,q2);
+}
 
-int remMulti(int x){
-	int X = x;
-	vector<pii> d;
-	d.pb({1, 0});
-	int p = 2;
-	int ret = 1;
-	vector<pii> aux;
-			
-	for(int i = 2; i*i <= x; i++){
-		if(x%i == 0){
-			ret *= i;
-			while(x%i == 0) x /= i;
-			aux.clear();
-			for(auto y: d) aux.pb({i*y.f, y.s+1});
-			for(auto y: aux) d.pb(y);
+void build_sprime(){
+	sprime[1] = 1;
+	for(int i = 2; i <= 500000;i++){
+		if(sprime[i] == 0){
+			sprime[i] = i;
+			for(int j = i; j <= 500000; j+= i){
+				if(sprime[j] == 0) sprime[j] = i;
+			}
 		}
 	}
+}
 
-	if(x > 1){
-		ret *= x;
-		aux.clear();
-		for(auto y: d) aux.pb({x*y.f, y.s+1});
-		for(auto y: aux) d.pb(y);
+void go_simple(){ // remove duplicate prime factors
+	frr(i,n){
+		int at = v[i];
+		while(at != 1){
+			int x = sprime[at];
+			prime[i].pb(x);
+			while(at%x == 0) at /= x;
+		}
+		v[i] = 1;
+		for(auto x: prime[i]) v[i] *= x;
 	}
 
-	Div[ret] = d;
-
-	return ret;
-}
-
-void read(){
-	cin >> n >> m;
-	frr(i, n){
-		cin >> a[i];
-		a[i] = remMulti(a[i]);
+	frr(i,n){
+		int k = prime[i].size();
+		for(int mask = 0; mask < (1 << k); mask++){
+			int divisor = 1;
+			fr(j,k){
+				if(mask&(1 << j)) divisor *= prime[i][j]; 
+			}
+			divi[i].pb(divisor);
+		}
 	}
 }
 
-/*
-	l[x] são os índices i tais que x | a[i]
-*/
-vector<int> l[MAXN];
-
-/*
-	retorna a quantidade de a's com índice entre [i, j) que são múltiplos de x
-*/
-int mult(int x, int i, int j){
-	int ret = (lower_bound(l[x].begin(), l[x].end(), i) - l[x].begin()); 
-	//cout << x << " " << i << ' ' << j << " " << l[x].size() << endl;
-	return l[x].size() - ret;
+int mult(int x,int i){
+	auto it = lower_bound(all(L[x]),i);
+	int q = (int)(L[x].end() - it);
+	return q;
 }
 
-/*
-	Retorna a quantidade de a's com índice entre [i, j) que não são coprimos com a[j]
-*/
 int ncop(int i, int j){
-	int ans = 0;
-	for(auto par : Div[a[j]]){
-		if(par.f == 1) continue;
-		if(par.s%2 == 1) ans += mult(par.f, i, j);
-		else ans -= mult(par.f, i, j);
-	}
-	return ans;
+ 	int k = prime[j].size();
+ 	int ans = 0;
+ 	for(int mask = 0; mask < (1 << k); mask++){
+ 		if(mask == 0) continue;
+ 		int divisor = divi[j][mask];
+ 		int q = mult(divisor, i);
+ 		if(__builtin_popcount(mask)%2) ans += q;
+ 		else ans -= q; 
+ 	}
+ 	return ans;
 }
-
-int findPr(int j){
-	int lo = 0, hi = j, m;
-
-	while(lo < hi - 1){
-		m = (lo + hi)/2;
-
-		//cout << ncop(m, j) <<" | " << m << " " << j << endl;
-
-		if(ncop(m, j) == j - m){
-			//cout << lo << " | " << m << " " << j << endl;
-			hi = m;
-		}
-		else lo = m;
-	}
-
-	for(auto d : Div[a[j]]) {
-		l[d.f].pb(j);
-	}
-
-	return lo;
-}
-
-class SEG{
-private:
-	vector<int> v;
-	int node[MAXN];
-	int n;
-	void build(int i, int l, int r){
-		if(l == r) {
-			node[i] = v[l];
-		}
-		else{
-			int m = (l + r)/2;
-			build(2*i, l, m);
-			build(2*i + 1, m + 1, r);
-			node[i] = max(node[2*i], node[2*i+1]);
-		}
-	}
-public:
-	SEG(vector<int> & davez){
-		v = davez;
-		n = davez.size() - 1;
-		build(1, 1, n);
-	}
-
-	int query(int i, int l, int r, int ql, int qr){
-		if(ql > r || l > qr) return -1;
-		else if(ql <= l && r <= qr) return node[i];
-		else{
-			int m = (l + r)/2;
-			return max(query(2*i, l, m, ql, qr), query(2*i + 1, m + 1, r, ql, qr));
-		}
-	}
-};
 
 int main(){
-	fastio;
-	read();
-	
-	vector<int> pr(n+1);
-	frr(i, n){
-		pr[i] = findPr(i);
-		//cout << pr[i] << " ";
-	}
-	//cout << endl;
 
-	SEG s(pr);
-	while(m--){
-		int l, r;
-		cin >> l >> r;
-		if(s.query(1, 1, n, l, r) >= l) {
-			cout << "S\n";
+	fastio;
+	build_sprime();
+	cin >> n >> m;
+	frr(i,n) cin >> v[i];
+	go_simple();
+
+	frr(j,n){	
+		int l = 1;
+		int r = j - 1;
+		int best = 0;
+		while(l <= r){
+			int m = (l + r)/2;
+			if(ncop(m,j) < j - m){
+				best = m;
+				l = m + 1;
+			}
+			else{
+				r = m - 1;
+			}
 		}
-		else cout << "N\n";
+		pr[j] = best;	
+		for(auto x: divi[j]) L[x].pb(j);
+	}
+
+	frr(i,n){
+		update(1,1,n,i,pr[i]);
+	}
+
+	frr(i,m){
+		int l,r;
+		cin >> l >> r;
+		if(query(1,1,n,l,r) >= l){
+			cout << 'S' << endl;
+		}
+		else{
+			cout << 'N' << endl;
+		}
 	}
 }
