@@ -74,7 +74,7 @@ void find(ll n, ll k){ // assuming n is small (<= 20) solve the problem
 				mask |= (1 << (j - 1));
 				break;
 			}
-			else{ // not enough deranregements
+			else{ // not enough derangements
 				k -= dp[mask];
 				mask ^= (1 << (j - 1));
 			}
