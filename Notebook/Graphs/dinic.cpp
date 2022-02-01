@@ -1,6 +1,6 @@
 /*
    Title: Dinitz algorithm for maximum flow
-   Description: Computes que maximum flow of a network
+   Description: Computes the maximum flow of capacitated network
    Complexity:  General O(EV**2)
 		Bip. Matching O(EV**1/2)
 		Unitary Cap. O(min(V**2/3, E**1/2)E)
