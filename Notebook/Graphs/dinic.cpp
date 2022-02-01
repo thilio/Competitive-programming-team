@@ -1,8 +1,14 @@
-// Algoritmo de Dinitz
-// Caso geral : O(EV^2)
-// Matching bip : O(EV^0.5)
-// Arestas são guardadas como uma lista ligada
-// first[v] é a primeira aresta, percorrer até -1 (v = nxt[v])
+/*
+   Title: Dinitz algorithm for maximum flow
+   Description: Computes que maximum flow of a network
+   Complexity: General O(EV**2)
+					Bip. Matching O(EV**1/2)
+					Unitary Cap. O(min(V**2/3, E**1/2)E)
+   Details: Edges are store as a linked list, start in first[u]
+   	and run ultil -1. Real edges are even edges (redidual is e^1).
+
+   Credits: https://github.com/splucs/Competitive-Programming/tree/master/Macac%C3%A1rio
+*/
 
 #define INF 0x3f3f3f3f
 const int MAXN = 1e5 + 3000;
@@ -70,5 +76,3 @@ int dinic(int s, int t){
 	}
 	return flow;
 }
-
-// Basado em : https://github.com/splucs/Competitive-Programming/tree/master/Macac%C3%A1rio
