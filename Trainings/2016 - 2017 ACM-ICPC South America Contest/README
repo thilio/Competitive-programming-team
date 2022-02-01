@@ -1,0 +1,9 @@
+Both URI and UVa online judges have wrong packages for problem i.
+To run official on site testes copy your solution to the folder
+"Checker I" with name "i.cpp" and run on terminal 
+
+$bash checker.sh
+
+If the checker only display running times and no diffs the solution 
+is correct. Notice that the oficial time limit is 3 seconds and 
+memory limit is 1gb.
