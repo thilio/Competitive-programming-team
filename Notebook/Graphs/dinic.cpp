@@ -1,11 +1,11 @@
 /*
    Title: Dinitz algorithm for maximum flow
    Description: Computes que maximum flow of a network
-   Complexity: General O(EV**2)
-					Bip. Matching O(EV**1/2)
-					Unitary Cap. O(min(V**2/3, E**1/2)E)
-   Details: Edges are store as a linked list, start in first[u]
-   	and run ultil -1. Real edges are even edges (redidual is e^1).
+   Complexity:  General O(EV**2)
+		Bip. Matching O(EV**1/2)
+		Unitary Cap. O(min(V**2/3, E**1/2)E)
+   Details: Edges are stored as a linked list, start in first[u]
+   	and ending at -1. Real edges are even edges (redidual is e^1).
 
    Credits: https://github.com/splucs/Competitive-Programming/tree/master/Macac%C3%A1rio
 */
@@ -19,8 +19,8 @@ int ned, first[MAXN], work[MAXN], dist[MAXN], q[MAXN];
 int cap[MAXM], to[MAXM], nxt[MAXM];
 
 void init(){
-   memset(first, -1, sizeof first);
-   ned = 0;
+	memset(first, -1, sizeof first);
+	ned = 0;
 }
 
 void add(int u, int v, int f){
