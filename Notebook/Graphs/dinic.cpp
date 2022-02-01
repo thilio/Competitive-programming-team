@@ -10,10 +10,10 @@
    Credits: https://github.com/splucs/Competitive-Programming/tree/master/Macac%C3%A1rio
 */
 
+using namespace std;
 #define INF 0x3f3f3f3f
 const int MAXN = 1e5 + 3000;
 const int MAXM = 9e5;
-using namespace std;
 
 int ned, first[MAXN], work[MAXN], dist[MAXN], q[MAXN];
 int cap[MAXM], to[MAXM], nxt[MAXM];
