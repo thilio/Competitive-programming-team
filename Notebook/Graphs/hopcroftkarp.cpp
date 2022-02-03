@@ -1,7 +1,7 @@
 /*
    Title: Hopcroft-Karp algorithm for maximum matching
    Description: Computes the maximum matching in a bipartite graph
-   Complexity:  hopcroftKarp O(EV**2)
+   Complexity:  hopcroftKarp O(E(V**1/2))
    		Min_cover O(V)
 
    Details: Only the adjacency of one side is needed.
