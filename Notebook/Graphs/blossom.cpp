@@ -3,7 +3,7 @@
    Description: Computes the maximum matching in a general graph
    Complexity:  blossom O(EV)
    
-   Details: Vetices numbered from 0 to n.
+   Details: Vetices numbered from 0 to n - 1.
    One may start with a greedy maximal matching, but I never saw a real difference.
 
    Credits: https://codeforces.com/profile/bicsi
