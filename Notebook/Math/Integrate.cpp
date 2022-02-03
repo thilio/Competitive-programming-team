@@ -16,7 +16,7 @@
 
 template<class F>
 
-double Simp(double a, double b, F f, const int n = 1000){
+double Simp(double a, double b, F f, const int n = 100000){
    double h = (b - a)/ 2 / n, v = f(a) + f(b);
    for(int i = 1; i < 2*n; i++){
       v += f(a + i*h)*(i&1 ? 4 : 2);
