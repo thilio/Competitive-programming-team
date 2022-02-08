@@ -1,5 +1,5 @@
 /*
-	Title: Library for matrix operations
+    Title: Library for matrix operations
 
 */
 
@@ -45,14 +45,23 @@ matrix operator - (matrix & a, matrix & b){
     return ret;
 }
 
+matrix fastxp(matrix b, long long e){
+    if(e == 1) return b;
+    else{
+        matrix ret = fastxp(b, e / 2);
+        if(e%2) ret = ret * b;
+        return ret;
+    }
+}
+
 /*
-	Title: Gauss-Jordan elimination algorithm 
+    Title: Gauss-Jordan elimination algorithm 
     Description: Find the inverse of a given matrix A
-	Complexity: O(n^3)
+    Complexity: O(n^3)
 
     Details:
-		- It returns in matrix b the inverse of a, if it exists.
-		- Return true if the inverse exists and false otherwise
+        - It returns in matrix b the inverse of a, if it exists.
+        - Return true if the inverse exists and false otherwise
 */
 bool inverse (matrix a, matrix & b) {
     int n = (int)a.size();
@@ -70,22 +79,22 @@ bool inverse (matrix a, matrix & b) {
             swap (a[sel][i], a[it][i]), swap(b[sel][i], b[it][i]);
 
         T c = a[it][it];
-        for (int i = 0; i < n; i++)	
-        	a[it][i] /= c, b[it][i] /= c;
+        for (int i = 0; i < n; i++) 
+            a[it][i] /= c, b[it][i] /= c;
 
         // Eliminate all entries in the column it
-        for (int i = 0; i < n; i++)	
+        for (int i = 0; i < n; i++) 
             if (i != it) {
                 c = a[i][it];
                 for (int j = 0; j < n; j++)
                     a[i][j] -= a[it][j] * c, b[i][j] -= b[it][j] * c;
             }
     }
-	return true;
+    return true;
 }
 
 /*
-	Title: Algorithm to find determinant of matrix A
+    Title: Algorithm to find determinant of matrix A
     Description: Algorithm to find determinant of matrix A
     Complexity: O(n^3)
 */
@@ -104,18 +113,18 @@ T determinant(matrix a) {
             swap (a[sel][i], a[it][i]);
 
         T c = a[it][it];
-        for (int i = 0; i < n; i++)	
-        	a[it][i] /= c;
+        for (int i = 0; i < n; i++) 
+            a[it][i] /= c;
 
         ret *= c;
 
         // Eliminate all entries in the column it
-        for (int i = 0; i < n; i++)	
+        for (int i = 0; i < n; i++) 
             if (i != it) {
                 c = a[i][it];
                 for (int j = 0; j < n; j++)
                     a[i][j] -= a[it][j] * c;
             }
     }
-	return true;
+    return true;
 }
