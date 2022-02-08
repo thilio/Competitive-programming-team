@@ -1,7 +1,7 @@
 /*
    Title: Hopcroft-Karp algorithm for maximum matching
    Description: Computes the maximum matching in a bipartite graph
-   Complexity:  hopcroftKarp O(EV**2)
+   Complexity:  hopcroftKarp O(E(V**1/2))
    		Min_cover O(V)
 
    Details: Only the adjacency of one side is needed.
@@ -10,7 +10,7 @@
 	Konig-Egervary's theo: In bip. graphs match(G) = cover(G);
 	Gallai ID1: Min cover is the complement of max stable set;
 	Gallai ID2: If not isolated vertices, Edge-cover(G) + match(G) = V.
-	Dilwoth's L: In a partial order |Largest antichain| = |Sammalest path cover| 
+	Dilwoth's L: In a partial order |Largest antichain| = |Smmalest path cover| 
 
    Credits: https://github.com/splucs/Competitive-Programming/tree/master/Macac%C3%A1rio
 */
