@@ -1,5 +1,9 @@
-#include "bits/stdc++.h"
-using namespace std;
+/*
+   Title: Trie
+   Description: Data structure for strings
+   Complexity: O(|P|), where P is the string
+   			   being added, removed or searched
+*/
 
 const int MAXN = 100100; 
 int en;
@@ -25,7 +29,7 @@ void init(){
 	new_node();
 }
 
-void add(int node, string &s,int i){ // add string to trie
+void add(int node, string &s, int i){ // Add string to trie
 	t[node].cnt++;
 	if(i == s.size()){
 		t[node].wrd++;
@@ -37,6 +41,31 @@ void add(int node, string &s,int i){ // add string to trie
 	add(t[node].m[s[i]], s, i + 1);
 }
 
-int main(){
+bool remove(int node, string &s, int i){ // Return true if s was in the trie
+	if(i == s.size()){
+		if(t[node].wrd){
+			t[node].wrd--;
+			t[node].cnt--;
+			return true;
+		}
+		return false;
+	}
 
+	if(!t[node].m.count(s[i])) return false;
+	int son = t[node].m[s[i]];
+	if(remove(son, s, i + 1)){
+		t[node].cnt--;
+		if(t[son].cnt == 0) t[node].m.erase(s[i]);
+		return true;
+	}
+	return false;
+}
+
+bool find(int node, string &s, int i){ // Return true if s was in the trie
+	if(i == s.size()){
+		if(t[node].wrd) return true;
+		return false;
+	}
+	if(!t[node].m.count(s[i])) return false;
+	return find(t[node].m[s[i]], s, i + 1);
 }
