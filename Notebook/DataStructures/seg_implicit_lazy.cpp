@@ -12,16 +12,17 @@
         when building the root)
             - Seg<int> * root = new Seg(0, 1000000000)
 		- It is around 1.8 times slower than the Static SegTree 
+        - NEUT is the neutral value of the operation
 */
 template<typename T>
 struct Seg {
-    const T NEUT = 0;
+    const T NEUT = 0; // Be aware
     int l, r;
     T sum = NEUT, lz = NEUT;
     Seg * lv = nullptr, * rv = nullptr;
 
-    Seg(int lb, int rb) : l(lb), r(rb) {} ;
-    T merge(T left, T right) {return left + right;}
+    Seg(int lb = 0, int rb = 0) : l(lb), r(rb) {} ;
+    T merge(T left, T right) {return left + right;} // Be aware
     void applyLazy(){
         if(lz != NEUT){
            sum = merge(sum, lz * (r - l + 1)); // Be aware
