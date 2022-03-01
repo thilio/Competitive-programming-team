@@ -42,6 +42,10 @@ struct ImplicitTreap{
             prior = rng(), l = r = nullptr;
             val = v, sz = 1, sum = v, rev = lazy = 0;
         }
+        ~item(){
+            if(l) delete l;
+            if(r) delete r;
+        }
     };
     typedef item* node;
     node root;
