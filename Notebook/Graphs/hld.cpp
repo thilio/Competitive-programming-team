@@ -12,13 +12,15 @@
    Details: On the complexity section, DS is the compexity of the auxiliary data structure.
 	Here, things must be associative.
 
-	When dealing with HLD for edges, some indexes must be changed. Think of the edge
+	When dealing with HLD for edges/ifs, some indexes must be changed. Think of the edge
 	as the decendent vertex and store the values in it. HLD works on vertices.
    
    Credits: https://github.com/brunomaletta/Biblioteca/tree/master/Codigo/Grafos/LCA-HLD
 */
 
 const int MAXN = 4e5 + 10;
+#define oper(a, b) a + b // opration
+#define NEUT 0 // neutral element
 
 namespace seg{}; // seg is just a model, can be any assocative DS
 
@@ -64,6 +66,8 @@ namespace hld{
 	// The indices comments are the ones to change when dealing with edges
 
 	void update_path(int a, int b, int x){
+		// if (a == b) return; // For edges, be careful with meaningless queries
+
 		if (pos[a] < pos[b])
 			swap(a, b);
 		if (h[a] == h[b])
@@ -72,23 +76,22 @@ namespace hld{
 		update_path(pai[h[a]], b, x);
 	}
 
-	int combine(int a, int b){
-		// combine query values
-	}
-
 	int query_path(int a, int b){
+		// if (a == b) return 0; // For edges, be careful with meaningless queries
 		if (pos[a] < pos[b])
 			swap(a, b);
 		if (h[a] == h[b])
 			return seg::query(pos[b], pos[a]); // pos[b] + 1
-		return combine(seg::query(pos[h[a]], pos[a]) , query_path(pai[h[a]], b));
+		return oper(seg::query(pos[h[a]], pos[a]), query_path(pai[h[a]], b));
 	}
 
 	void update_subtree(int a, int x){
+		// if (sz[a] == 1) return; // For edges, be careful with meaningless queries
 		seg::update(pos[a], pos[a] + sz[a] - 1, x); // pos[a] + 1
 	}
 	
 	int query_subtree(int a){ // subtree is stored sequentially
+		// if (sz[a] == 1) return 0; // For edges, be careful with meaningless queries
 		return seg::query(pos[a], pos[a] + sz[a] - 1); //pos[a] +1
 	}
 
