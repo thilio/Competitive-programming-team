@@ -3,7 +3,7 @@
    Description: Computes single source shortest path with negative edges
    Complexity:  bellman O(VE)
 
-   Details: May be used to detect negative cycles.
+   Details: May be used to detect negative cycles reacheble from the source.
    	One may write an optimized version using queue.
 
 	One may detect a negative product cycle by applying log() to the cost of the edges.
