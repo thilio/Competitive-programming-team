@@ -1,6 +1,3 @@
-#include "bits/stdc++.h"
-using namespace std;
-
 /*
    Title: Number of inversions between two arrays
    Description: given two arrays l and r, returns
