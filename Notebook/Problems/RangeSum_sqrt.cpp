@@ -1,3 +1,14 @@
+/*
+   Title: Square root decomposition
+   Description: Use square root decomposition to solve range sum with point update
+   Complexity: O(n + q sqrt(n))
+   Details: This a simple example of the technique. You can think in
+   			sqrt decomposition when you can handle "small" queries
+   			and "large" queries in different ways such that both
+   			are efficient.
+   Solves: https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A
+*/
+
 #include "bits/stdc++.h"
 using namespace std;
 
