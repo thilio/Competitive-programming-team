@@ -112,6 +112,10 @@ struct circle{
 	bool intsec(circle b){ // circunference
 		return ((sign((c - b.c).norm() - (r + b.r)) <= 0) and 
 		(sign((c - b.c).norm() - fabs(r - b.r)) >= 0)); }
+
+	bool contains(point p){
+		return (sign((p - c).norm2() - r*r) <= 0);
+	}
 	
 	vector<point> get_intsec(line l){ 
 		coord d = l.dist(c);

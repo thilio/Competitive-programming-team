@@ -174,3 +174,17 @@ vector<point> halfp_intersect(vector<halfplane>& H) {
 
 	return ret;
 }
+
+circle min_circle_cover (vector<point> v) { // Minimum circle that covers all points. O(n)
+	mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+	int i,j,k;
+	int n = v.size();
+	shuffle(v.begin(), v.end(), rng);
+	circle c(point(), 0);
+
+	for (i = 0; i < n; i++) if (!c.contains(v[i]))
+		for (c = circle(v[i],0), j = 0; j < i; j++) if (!c.contains(v[j]))
+			for (c = circle((v[i] + v[j])/2, (v[i]-v[j]).norm()/2), k = 0; k < j; k++) if (!c.contains(v[k]))
+					c = circuns_triang(v[i],v[j],v[k]);
+	return c;
+}
