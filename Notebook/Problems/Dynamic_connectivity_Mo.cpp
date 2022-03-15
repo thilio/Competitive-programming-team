@@ -3,7 +3,9 @@
    Description: Mo's algorithm to solve dynamic connectivity
    Complexity: O(q sqrt(m) log(n))
    Details: DSU with rollback and MO to solve dynamic connectivity
-   			querie
+   			queries. You have an array of edges and the query
+   			is the number of connected components considering
+   			the edges from l to r. 
    Solves: https://www.codechef.com/problems/GERALD07
 */
 
