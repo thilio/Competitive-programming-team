@@ -40,7 +40,7 @@ struct point {
 void swap(point &a, point &b){ point aux = a; a = b; b = aux; }
 
 struct line {
-	point p; coord c; //p * <x,y> = c
+	point p; coord c; //(x, y) is in the line if p * (x,y) = c
 	line() {} line(point _p, coord _c): p(_p), c(_c) {}
 	line(point a, point b) : p((b - a).rot90()), c(p * a) {}
 	line get_parall(point v){ return line(p, p * v); }// parallel line at point v
@@ -51,7 +51,7 @@ struct line {
 
 	coord dist(point v){ return abs(p * v - c) / p.norm(); }
 
-	point get_intsec(line l){ coord d = p^l.p; return point((c*l.p.y - l.c*p.y)/d, (p.x*l.c - c*l.p.x)/d); }
+	point get_intsec(line l){ coord d = p^l.p; return point((c*l.p.y - l.c*p.y)/d, (p.x*l.c - c*l.p.x)/d); } // parallel lines result in division by zero
 };
 
 struct segment {
@@ -141,6 +141,7 @@ struct circle{
 };	
 
 circle circuns_triang(point a, point b, point c){ // circunscribed circle of a triangle
+	// colinear points lead to division by zero 
 	line l1 = (line(a, b).get_perp()).get_parall((a + b)/2);
 	line l2 = (line(a, c).get_perp()).get_parall((a + c)/2);
 	point cnt = l1.get_intsec(l2);
