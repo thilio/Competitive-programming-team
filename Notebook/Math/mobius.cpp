@@ -4,9 +4,9 @@
     Complexity: O(n)
     
     Details:
-    μ[n] = +1 if n is a square-free positive integer with an even number of prime factors.
-    μ[n] = −1 if n is a square-free positive integer with an odd number of prime factors.
-    μ[n] = 0 if n has a squared prime factor.
+    u[n] = +1 if n is a square-free positive integer with an even number of prime factors.
+    u[n] = −1 if n is a square-free positive integer with an odd number of prime factors.
+    u[n] = 0 if n has a squared prime factor.
 
     More details: https://codeforces.com/blog/entry/53925
 */
