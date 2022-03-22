@@ -12,8 +12,8 @@ template<int mod>
 struct modInt {
   	unsigned x;
   	modInt() : x(0) { }
-	modInt(signed sig) : x(sig) {  }
-	modInt(signed long long sig) : x(sig%mod) { }
+	modInt(signed sig) : x((sig%mod + mod)%mod) {  }
+	modInt(signed long long sig) : x((sig%mod + mod)%mod) { }
 	int get() const { return (int)x; }
 	modInt pow(ll p) { 
 		modInt res = 1, a = *this; 
