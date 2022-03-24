@@ -31,27 +31,3 @@ void all_inverse(){
 	for(int i = 2; i < m; ++i)
 	    inv[i] = m - (m/i) * inv[m%i] % m;
 }
-
-
-/*
-	Pick Theorem: 
-	Given a not necessarily convex polygon P whose verties with lattice
-	coordinates, its area is given by:
-
-		Area = B / 2 + I - 1
-
-	B = number of lattice points in the border of P
-	I = number of lattice points strictly inside P
-*/
-
-/*
-	Euler Theorem(Planar graphs):
-	Given a planar graph, we have the following:
-
-		V - E + F = C + 1
-
-	V = number of vertices
-	A = number of edges
-	F = number of faces
-	C = number of components
-*/
