@@ -33,6 +33,7 @@ T interpolate(vector<T> &x, vector<T> &y, T p){
 
 	return ans;
 }
+template<typename T>
 T interpolate_linear(T x0, T delta, vector<T> &y, T p){
 	T ans = 0;
 	int n = y.size();
