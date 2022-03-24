@@ -1,8 +1,8 @@
 /*
-   Title: Polynomial interpolation of integer points
+   Title: Polynomial interpolation of equally spaced points
    Description: Use math computations to evaluate the interpolation using only addition and subtraction
    Complexity: O(n*(n + m)), where n is the degree of the polynomial and m is the number of points
-   			   you want to evaluate
+   			   you want to evaluate. It is much faster than Lagrange Interpolation (for O(n) points)
    Details: The given points (and the ones you want to evaluate) must be equally spaced. The idea
    			is to compute P(x) - P(x - 1), since this result in a polynomial of degree n - 1,
    			until we reach a polynomial of degree 0, a constant, and then reconstruct the table mat.
