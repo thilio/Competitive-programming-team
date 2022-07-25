@@ -42,13 +42,13 @@ void min_cover(){
 bool dfs(int u){
 	vis[u] = iter;
 	if (u == 0) return true;
-		for (int &v : adju[u]){
-			if (vis[matchv[v]] < iter and dfs(matchv[v])){
-				matchv[v] = u; 
-				matchu[u] = v;
-				return true;
-			}
+	for (int &v : adju[u]){
+		if (vis[matchv[v]] < iter and dfs(matchv[v])){
+			matchv[v] = u; 
+			matchu[u] = v;
+			return true;
 		}
+	}
 	return false;
 }
 
