@@ -4,10 +4,9 @@
    Complexity: O(E + V)
    
    Details: Two vertices u and v are in the same componete if they 
-   are connected by two edge disjoint paths.(Notice, may repeat vertex)
+   are connected by two edge disjoint paths.(Notice, may repeat a vertex)
 
-   Every pair of edges in a ebcc belongs to a cycle, where all edges
-   belong to that component.
+	Bridges separate ebcc and are the edges of the condensed graph.
 */
 
 const int MAXN = 4e5 + 10; // Graph Size
