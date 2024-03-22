@@ -30,15 +30,16 @@ struct CHT{
 	      	Hull[i - 2]=Hull[i - 1], Hull.pop_back(), i--;
 	}
 	ll query(ll x) {
-	    ll l = -1, r = Hull.size();
-	    while (r - l > 1) {
-	        ll m = (l + r) / 2;
-	        if ((getVal(Hull[m], x) <= getVal(Hull[m + 1], x)))
-	           	l = m;
+	    if(Hull.size() == 1) return getVal(Hull[0], x);
+        ll l = -1, r = Hull.size();
+	    while (r - l > 2) {
+	        ll m1 = (2 * l + r) / 3, m2 = (l + 2 * r) / 3;
+	        if ((getVal(Hull[m1], x) <= getVal(Hull[m2], x)))
+	           	l = m1;
 	        else
-	            r = m;
+	            r = m2;
 	    }
-	    return getVal(Hull[r], x);
+	    return max(getVal(Hull[l + 1], x), getVal(Hull[r - 1], x));
 	}
 };
 
