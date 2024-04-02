@@ -1,0 +1,39 @@
+name: Build and Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Make
+        run: make
+      - name: Get current date
+        run: echo "CURRENT_DATE=$(date -u +'%Y-%m-%dT%H-%M-%SZ')" >> $GITHUB_ENV
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.CURRENT_DATE }}
+          release_name: Release ${{ env.CURRENT_DATE }}
+          body: |
+            Changes in this release:
+            - Added output artifacts
+          draft: false
+          prerelease: false
+      - name: Upload artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: notebook.pdf
+          asset_name: notebook.pdf
+          asset_content_type: application/pdf
