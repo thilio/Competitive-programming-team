@@ -4,10 +4,8 @@
 		Unitary Cap. O(min(V**2/3, E**1/2)E)
    Details: Edges are stored as a linked list, start in first[u]
    	and ending at -1. Real edges are even edges (redidual is e^1).*/
-const int MAXN = 1e5 + 3000;
-const int MAXM = 9e5;
 int ned, first[MAXN], work[MAXN], dist[MAXN], q[MAXN];
-int cap[MAXM], to[MAXM], nxt[MAXM];
+int cap[MAXM], to[MAXM], nxt[MAXM]; // Define MAXN, MAXM
 
 void init(){ memset(first, -1, sizeof first); ned = 0; }
 
@@ -34,7 +32,6 @@ int dfs(int u, int f, int t){
 	}
 	return 0;
 }
-///////////////////////////////////////////////////////////////////////////////////////////////
 
 bool bfs(int s, int t){
 	memset(&dist, -1, sizeof dist);
