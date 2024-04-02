@@ -2,12 +2,12 @@
 
 // Change here
 #show: project.with(
-  title: "Codando & Coringando",
+  title: "Hoje tem 'in queue' do Ribamar",
   date: datetime.today().display(),
   authors: (
-    "LipArcanjo",
-    "nathan_luiz",
-    "wnmrmr",
+    "Gabriel Morete",
+    "Lucas Harada",
+    "Thiago Oliveira",
   ),
 )
 
