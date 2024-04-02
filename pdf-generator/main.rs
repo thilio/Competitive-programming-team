@@ -74,8 +74,8 @@ fn hashes(lines: &[String], path: &str) -> Vec<String> {
 /// #cpp(`int main() {
 /// }`, hashes: ("foo", "bar"))
 fn codes() -> Result<String, std::fmt::Error> {
-    let mut sections = fs::read_dir("Notebook/")
-        .expect("Path `Notebook/ doesn't exists!")
+    let mut sections = fs::read_dir("WF_notebook/")
+        .expect("Path `WF_notebook/ doesn't exists!")
         .map(|entry| entry.expect("Failed to get entry").path())
         .collect::<Vec<_>>();
     sections.sort_by_key(|p| p.file_name().unwrap().to_string_lossy().to_lowercase());
