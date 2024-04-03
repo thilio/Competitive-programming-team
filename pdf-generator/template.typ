@@ -42,13 +42,13 @@
 
   v(2.4fr)
   pagebreak()
-
+  show: columns.with(3, gutter: 0.7em, )
   // Table of contents.
   outline(depth: 3, indent: true)
 
   // Main body.
   set par(justify: true)
-  show: columns.with(3, gutter: 0.7em, )
+
 
   body
 }
