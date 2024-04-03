@@ -1,4 +1,4 @@
-/*Description: Computes the minimum cost f-flow in a capacitated graph 
+/*Computes the minimum cost f-flow in a capacitated graph 
    Complexity:  O(VE + f * E log V)
 	Edges are stored as a linked list, start in first[u]
    and ending at -1. Real edges are even edges (redidual is e^1).
@@ -87,7 +87,7 @@ pair<tflw, tcst> min_cost_flow(int s, int t, tflw flow = INF) {
 		for (int u = t; u != s; u = to[pre[u] ^ 1])
 			df = min(df, cap[pre[u]]);
 
-		// For minimum cost free flow, increase while pot[t] < 0
+// For minimum cost free flow, increase while pot[t] < 0
 		val += pot[t] * df;
 
 		for (int u = t; u != s; u = to[pre[u] ^ 1]){
