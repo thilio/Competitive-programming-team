@@ -1,9 +1,9 @@
 /* Computes the maximum flow of capacitated network
-   Complexity:  General O(EV**2)
-		Bip. Matching O(EV**1/2)
-		Unitary Cap. O(min(V**2/3, E**1/2)E)
-   Edges are stored as a linked list starting in first[u]
-   	and ending at -1. Real edges are even edges (redidual is e^1).*/
+Complexity:  General O(EV**2)
+Bip. Matching O(EV**1/2)
+Unitary Cap. O(min(V**2/3, E**1/2)E)
+Edges are stored as a linked list starting in first[u]
+and ending at -1. Real edges are even edges (redidual is e^1).*/
 int ned, first[MAXN], work[MAXN], dist[MAXN], q[MAXN];
 int cap[MAXM], to[MAXM], nxt[MAXM]; // Define MAXN, MAXM
 void init(){ memset(first, -1, sizeof first); ned = 0; }
