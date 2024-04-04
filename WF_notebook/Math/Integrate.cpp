@@ -11,11 +11,8 @@
                return x*x;
             };
             quad(0, 1, f);
-   Credits: https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/Integrate.h
 */
-
 template<class F>
-
 double Simp(double a, double b, F f, const int n = 100000){
    double h = (b - a)/ 2 / n, v = f(a) + f(b);
    for(int i = 1; i < 2*n; i++){

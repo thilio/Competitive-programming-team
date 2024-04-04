@@ -1,14 +1,8 @@
-/*
-    Title: Karatsuba algorithm
-    Complexity: O(n^{log_2(3)})
+/*  Complexity: O(n^{log_2(3)})
     Description: 
         - fast multiplication of two polynomials
         - better than FFT when n is small(<= 30000) or when its
-        size differs a lot
-
-    Credits: Errichto (in comments of https://codeforces.com/blog/entry/74209)
-*/
-
+        size differs a lot*/
 #pragma GCC optimize("Ofast,unroll-loops")
 #pragma GCC target("avx,avx2,fma") 
 #include <bits/stdc++.h>
@@ -43,19 +37,8 @@ template<typename T> vector<T> karatsuba(vector<T> a, vector<T> b) {
     rec_kara(a.data(), a.size(), b.data(), b.size(), r.data());
     return r;
 }
-// =======================================================
 vector<int> r(int n) {
     vector<int> w;
     for(int i = 0; i < n; ++i) w.push_back(rand() % 10);
     return w;
-}
-int main() {
-    //vector<int> a = {1,2,3};
-    //vector<int> b = {5,0,20,500};
-    //vector<int> r = karatsuba(a, b);
-    vector<int> a = r(200123), b = r(200123);
-    //~ vector<int> a = r(500123), b = r(5817);
-    vector<int> r = karatsuba(a, b);
-    for(int i = 0; i < min(10, (int) r.size()); ++i) cout << r[i] << " ";
-    cout << "\n";
 }

@@ -15,7 +15,6 @@
 			interpolate_linear() receive a point x[0] and a delta, it assumes that x[i] = x[0] + i*delta,
 			it also receives the y-coordinate of the points and evaluate the interpolation at point p.
 */
-
 template<typename T>
 T interpolate(vector<T> &x, vector<T> &y, T p){
 	T ans = 0;

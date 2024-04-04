@@ -1,28 +1,16 @@
 /*
-    Title: Number Theoretic Transform
-    Description: Multiply two polynomials in Z_p, for p prime
-    Complexity: O(n * log n)
-
     Details: be aware that not all primes can be used and p = 998244353 is 
     the most used prime. To multiply it for a general modulus, use 3 different 
     possible primes and use Chinese Remainder Theorem to get the answear.
-
-    "const" makes it 3 times faster
-
-    Credits: https://cp-algorithms.com/algebra/fft.html#number-theoretic-transform
-*/
-
-/*
-    Possibilities
+    "const" makes it 3 times faster*/
+/*  Possibilities
     { 7340033, 5, 4404020, 1 << 20 },
     { 415236097, 73362476, 247718523, 1 << 22 },
     { 463470593, 428228038, 182429, 1 << 21},
     { 998244353, 15311432, 469870224, 1 << 23 },
-    { 918552577, 86995699, 324602258, 1 << 22 }
-*/
+    { 918552577, 86995699, 324602258, 1 << 22 }*/
 namespace NTT {
     const ll mod = 998244353, root = 15311432, root_1 = 469870224, root_pw = 1 << 23;
-
     ll fastxp(ll n, ll e){
         ll ans = 1, pwr = n;
         while(e){
@@ -32,8 +20,6 @@ namespace NTT {
         }
         return ans % mod;
     }
-
-
     void fft(vector<ll> & a, bool invert) {
         ll n = a.size();
 
@@ -45,7 +31,6 @@ namespace NTT {
 
             if (i < j) swap(a[i], a[j]);
         }
-
         for (ll len = 2; len <= n; len <<= 1) {
             ll wlen = invert ? root_1 : root;
             for (ll i = len; i < root_pw; i <<= 1)
@@ -67,16 +52,13 @@ namespace NTT {
             for (ll & x : a) x = x * n_1 % mod;
         }
     }
- 
     vector<ll> multiply(vector<ll> &a, vector<ll> &b) {
         vector<ll> fa(a.begin(), a.end()), fb(b.begin(), b.end());
         ll sz = a.size() + b.size() - 1, n = 1;
         while (n < sz) n <<= 1;
-
         fa.resize(n), fb.resize(n);
         fft(fa, 0), fft(fb, 0);
         for (ll i = 0; i < fa.size(); i++) fa[i] = fa[i] * fb[i] % mod;
-
         fft(fa, 1);
         fa.resize(sz);
         return fa;

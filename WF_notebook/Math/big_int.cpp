@@ -1,30 +1,18 @@
-/*
-    Title: Big Integer structure
-
-    Description: handles operations with integers with any number of digits
-    
-    Complexity: 
-        - Sum, subtraction, comparators: O(n)
-        - Multiplication: O(n log(n))
-        - Division and modulo: O(n^2)
-
-    Credits: https://github.com/brunomaletta/Biblioteca/blob/master/Codigo/Primitivas/bigint.cpp
-*/
-
+/*Complexity: 
+    - Sum, subtraction, comparators: O(n)
+    - Multiplication: O(n log(n))
+    - Division and modulo: O(n^2)*/
 struct bint {
     static const int BASE = 1e9;
     vector<int> v;
     bool neg;
-
     bint() : neg(0) {}
     bint(int val) : bint() { *this = val; }
     bint(long long val) : bint() { *this = val; }
-
     void trim() {
         while (v.size() and v.back() == 0) v.pop_back();
         if (!v.size()) neg = 0;
     }
-
     // converter de/para string | cin/cout
     bint(const char* s) : bint() { from_string(string(s)); }
     bint(const string& s) : bint() { from_string(s); }
@@ -99,7 +87,6 @@ struct bint {
     friend bool operator>=(const bint& l, const bint& r) { return l.cmp(r) >= 0; }
     friend bool operator==(const bint& l, const bint& r) { return l.cmp(r) == 0; }
     friend bool operator!=(const bint& l, const bint& r) { return l.cmp(r) != 0; }
-
     bint& operator +=(const bint& r) {
         if (!r.v.size()) return *this;
         if (neg != r.neg) return *this -= -r;
@@ -127,7 +114,6 @@ struct bint {
         return *this;
     }
     friend bint operator-(bint a, const bint& b) { return a -= b; }
-
     // operators de * / %
     bint& operator *=(int val) {
         if (val < 0) val *= -1, neg ^= 1;

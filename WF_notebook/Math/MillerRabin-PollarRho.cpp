@@ -1,23 +1,13 @@
-/*
-    Titlie: Algorithms in Number Theory to deal with large numbers
-
-    1) Pollard-rho algorithm (rho(n))
+/*  1) Pollard-rho algorithm (rho(n))
         - Find a prime factor of a givern number n
         - Complexity: O(n^{1/4})
-    
     2) Miller Rabin (isPrime(n))
         - Determine if a given number is prime
         - Works for all n up to 7 * 10^18
         - Complexity: O(7 * log(n))
-
     3) Factorization (factor(n))
         - Factorize a number give number n
-        - Complexity: O(n^{1/4} * log(n))
-
-    Credits:
-        - https://github.com/kth-competitive-programming/kactl/tree/main/content/number-theory
-*/
-
+        - Complexity: O(n^{1/4} * log(n))*/
 namespace randNT{
     typedef long long int u64;
     u64 modmul(u64 a, u64 b, u64 M) {
@@ -30,7 +20,6 @@ namespace randNT{
             if (e & 1) ans = modmul(ans, b, mod);
         return ans;
     }
-
     bool isPrime(u64 n) {
         if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;
         u64 A[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022},
@@ -43,7 +32,6 @@ namespace randNT{
         }
         return 1;
     }
-
     u64 pollard(u64 n) {
         auto f = [n](u64 x) { return modmul(x, x, n) + 1; };
         u64 x = 0, y = 0, t = 30, prd = 2, i = 1, q;
@@ -54,7 +42,6 @@ namespace randNT{
         }
         return __gcd(prd, n);
     }
-
     vector<long long> factor(u64 n) {
         if (n == 1) return {};
         if (isPrime(n)) return {(long long)n};
