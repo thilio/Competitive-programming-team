@@ -1,13 +1,4 @@
-/*
-   Title: Trie
-   Description: Data structure for strings
-   Complexity: O(|P|), where P is the string
-   			   being added, removed or searched
-*/
-
-const int MAXN = 100100; 
 int en;
-
 struct trie{
 	int cnt, wrd;
 	map<char, int> m;
@@ -17,18 +8,15 @@ struct trie{
 	}
 	
 }t[MAXN];
-
 int new_node(){
 	t[en].cnt = t[en].wrd = 0;
 	t[en].m.clear();
 	return en++;
 }
-
 void init(){
 	en = 0;
 	new_node();
 }
-
 void add(int node, string &s, int i){ // Add string to trie
 	t[node].cnt++;
 	if(i == s.size()){
@@ -40,7 +28,6 @@ void add(int node, string &s, int i){ // Add string to trie
 	}
 	add(t[node].m[s[i]], s, i + 1);
 }
-
 bool remove(int node, string &s, int i){ // Return true if s was in the trie
 	if(i == s.size()){
 		if(t[node].wrd){
@@ -60,7 +47,6 @@ bool remove(int node, string &s, int i){ // Return true if s was in the trie
 	}
 	return false;
 }
-
 bool find(int node, string &s, int i){ // Return true if s was in the trie
 	if(i == s.size()){
 		if(t[node].wrd) return true;

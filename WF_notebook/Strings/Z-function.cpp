@@ -1,15 +1,3 @@
-/*
-	Title: Z-function
-	Description: algorithm to compute the z-function of a given string
- 	Complexity: O(n)
-	Details:
-			0-indexed.
-			z[i] is the largest common prefix between the string s
-			and the suffix of s starting at i.
-			z[0] = 0 for convenience.
-	Credits: https://cp-algorithms.com/string/z-function.html
-*/
-
 vector<int> z_function(string s) {
     int n = (int) s.length();
     vector<int> z(n);
