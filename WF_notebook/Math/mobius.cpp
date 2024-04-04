@@ -1,16 +1,9 @@
-/*
-    Title: Mobius function
-    Description: Find the mobius function for all numbers < MAXN
-    Complexity: O(n)
-    
+/*  Complexity: O(n)
     Details:
     u[n] = +1 if n is a square-free positive integer with an even number of prime factors.
     u[n] = −1 if n is a square-free positive integer with an odd number of prime factors.
     u[n] = 0 if n has a squared prime factor.
-
-    More details: https://codeforces.com/blog/entry/53925
 */
-
 ll u[MAXN], lp[MAXN];
 vector<ll> pr;
 void sieve(){
