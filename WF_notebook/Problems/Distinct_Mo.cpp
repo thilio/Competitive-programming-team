@@ -10,8 +10,6 @@
 #include "bits/stdc++.h"
 using namespace std;
 
-const int MAXA = 1000100;
-
 vector<int> v, resp;
 int freq[MAXA];
 
