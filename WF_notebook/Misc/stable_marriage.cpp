@@ -1,25 +1,16 @@
-/*
-   Title: Gale–Shapley's algorithm for the stable marriege problem
-   Description: Finds a stable marriage between two sets
-   Complexity:  stable_marriage O(# of prefrences + n + m)
-   		   
-   Details: A stable marriage is a "matching" such that no simple exchange
-   leads to a new pair being more satisfied (both members of the new pair
-   prefer each other more).
-
-   This algorithm retuns the best possible assignment for the men side and
-   te worst possible for the women.
-
-   When a woman may be assined for many men, add the capacity of each woman + a
-   priority queue.
-*/
-
+/* Finds a stable marriage between two sets
+stable_marriage O(# of preferences + n + m)
+A stable marriage is a "matching" where no simple exchange 
+leads to a new pair where both members are more satisfied.
+This algorithm retuns the best possible assignment for the 
+men side and tte worst possible for the women.
+A woman may be assined for many men, add the capacity of 
+each woman + a priority queue.*/
 int n, m; // # of men and women
 vector<int> lista[MAXN]; // list of woman for each man
-int nota[MAXN][MAXN]; // rank that each woman give for each man
+int nota[MAXN][MAXN]; // score of each man for each woman
 int matchn[MAXN], matchm[MAXN]; // pair of each member
 int p[MAXN]; // progress for each man
-
 void stable_marriage(){
 	fill(matchm, matchm + m, -1);
 	fill(p, p + n, 0);
