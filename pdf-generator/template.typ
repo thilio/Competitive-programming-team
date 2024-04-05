@@ -11,6 +11,7 @@
     // Adjust this
     header: [USP - Hoje tem 'in queue' do Ribamar   #h(1fr)  #counter(page).display()],
     margin: (left: 12mm, right: 12mm, top: 5mm, bottom: 10mm),
+    number-align: none,
     numbering: "1", 
     flipped: true
   )
