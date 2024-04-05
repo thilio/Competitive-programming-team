@@ -6,8 +6,6 @@ The lcp array contains longest common prefixes for
 neighbouring strings in the suffix array:
 lcp[i] = lcp(sa[i], sa[i-1]), lcp[0] = 0
 The input string must not contain any zero bytes.*/
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
-#define sz(x) (int)(x).size()
 struct SuffixArray {
 	vi sa, lcp; // can be used with basic_string<int>
 	SuffixArray(string& s,int lim=256){

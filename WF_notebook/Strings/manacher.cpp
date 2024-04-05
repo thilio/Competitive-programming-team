@@ -1,8 +1,6 @@
 /* Finds all palidromes of a string O(|string|)
 p[0][i] = half len of longest even palindrome (aab[b]aa) 
 p[1][i] = half len rounded down of longest odd palindrome*/
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
-#define sz(x) (int)(x).size()
 array<vi, 2> manacher(const string& s) {
 	int n = sz(s);
 	array<vi,2> p = {vi(n+1), vi(n)};
