@@ -50,13 +50,14 @@ the hash of `hash.sh` is
 #include "bits/stdc++.h"
 using namespace std;
 #define dbg(x)  cout << #x << " = " << x << endl
-#define all(x)  x.begin(), x.end()
-const int INF = 0x3f3f3f3f;
-const int llINF = 0x3f3f3f3f;
-ios_base::sync_with_stdio(false); 
-cin.tie(NULL); cout.tie(NULL);
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
 #define sz(x) (int)(x).size()
+#define all(x)  x.begin(), x.end()
+const int INF = 0x3f3f3f3f;
+const long long int llINF = 0x3f3f3f3f3f3f3f;
+ios_base::sync_with_stdio(false); 
+cin.tie(NULL); cout.tie(NULL);
+
 ```
 = Code
 
