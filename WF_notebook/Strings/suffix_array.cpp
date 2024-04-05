@@ -5,8 +5,7 @@ The returned vector is of size n+1, and sa[0] = n.
 The lcp array contains longest common prefixes for
 neighbouring strings in the suffix array:
 lcp[i] = lcp(sa[i], sa[i-1]), lcp[0] = 0
-The input string must not contain any zero bytes.
-*/
+The input string must not contain any zero bytes.*/
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
 #define sz(x) (int)(x).size()
 struct SuffixArray {
