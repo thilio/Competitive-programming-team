@@ -12,7 +12,7 @@
     header: [USP - Hoje tem 'in queue' do Ribamar],
     margin: (left: 12mm, right: 12mm, top: 5mm, bottom: 10mm),
     numbering: "1", 
-    number-align: center, 
+    number-align: right + top, 
     flipped: true
   )
   set text(font: "Linux Libertine", lang: "en", size: 8pt)
