@@ -13,7 +13,7 @@
 
 = Theory
 
-== Lagrange interpolating polynomial
+=== Lagrange interpolating polynomial
 
 Given points $(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)$ a polynomial $P$ with minimal degree such that $P(x_i) = y_i$ is given by
 
@@ -45,6 +45,19 @@ while
 the hash of `hash.sh` is 
 `9cd12`.
 
+= Template
+```cpp
+#include "bits/stdc++.h"
+using namespace std;
+#define dbg(x)  cout << #x << " = " << x << endl
+#define all(x)  x.begin(), x.end()
+const int INF = 0x3f3f3f3f;
+const int llINF = 0x3f3f3f3f;
+ios_base::sync_with_stdio(false); 
+cin.tie(NULL); cout.tie(NULL);
+#define rep(i, a, b) for(int i = a; i < (b); ++i)
+#define sz(x) (int)(x).size()
+```
 = Code
 
 // Script will be used to insert code here
