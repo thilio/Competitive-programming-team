@@ -9,10 +9,9 @@
   set document(author: authors, title: title)
   set page(
     // Adjust this
-    header: [USP - Hoje tem 'in queue' do Ribamar],
+    header: [USP - Hoje tem 'in queue' do Ribamar  #align(right)[#counter(page).display()]],
     margin: (left: 12mm, right: 12mm, top: 5mm, bottom: 10mm),
     numbering: "1", 
-    number-align: top, 
     flipped: true
   )
   set text(font: "Linux Libertine", lang: "en", size: 8pt)
