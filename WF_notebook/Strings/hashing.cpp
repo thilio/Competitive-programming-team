@@ -1,12 +1,13 @@
-/*	- To use more than two primes, you may use __int128 or array<int>
-	- You may easily change it to handle vector<int> instead of string
-	- Other large primes: 1000041323, 100663319, 201326611
-	- If smaller primes are needed(For instance, need to store the mods in an array):
-			- 50331653, 12582917, 6291469, 3145739, 1572869*/
+/*more than two primes=> use __int128 or array<int>
+Other large primes: 1000041323, 100663319, 201326611
+Small primes: (need to store the mods in an array):
+50331653, 12582917, 6291469, 3145739, 1572869
+Remember (alfabet < base < mod)*/
 const long long mod1 = 1000015553, mod2 = 1000028537;
-mt19937 rng((int) chrono::steady_clock::now().time_since_epoch().count()); // Random number generator
-static long long base = uniform_int_distribution<int>(356, mod1 - 1)(rng);	// In case TL, use const
-// Remember (alfabet < base < mod)
+mt19937 rng((int) 
+	chrono::steady_clock::now().time_since_epoch().count());
+static long long base = uniform_int_distribution<int>(356, 
+mod1 - 1)(rng);// In case TL, use const
 struct hash_s{
 	string s; 
 	long long n;
