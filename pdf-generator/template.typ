@@ -9,7 +9,7 @@
   set document(author: authors, title: title)
   set page(
     // Adjust this
-    header: [USP]
+    header: [USP],
     margin: (left: 12mm, right: 12mm, top: 5mm, bottom: 10mm),
     numbering: "1", 
     number-align: center, 
