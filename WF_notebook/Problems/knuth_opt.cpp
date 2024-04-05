@@ -9,11 +9,8 @@
     é o ponto de divisão ótimo (o k da recorrência) para o intervalo v[1...j].
     Outra condição : C[a][c]+C[b][d]<=C[a][d]+C[b][c], a<=b<=c<=d.
                      C[b][c] <= C[a][d]    
-
     Problema, descobrir a ordem otima de particinar uma string em m pontos dados 
     tal que o custo de particionar no ponto i é o tamanho do intervalo
-
-    Solves: https://www.spoj.com/problems/BRKSTRNG/
 */
 
 const int MAXN = 1e3 + 10;

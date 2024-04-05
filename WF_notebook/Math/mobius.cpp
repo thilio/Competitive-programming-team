@@ -2,8 +2,7 @@
     Details:
     u[n] = +1 if n is a square-free positive integer with an even number of prime factors.
     u[n] = −1 if n is a square-free positive integer with an odd number of prime factors.
-    u[n] = 0 if n has a squared prime factor.
-*/
+    u[n] = 0 if n has a squared prime factor.*/
 ll u[MAXN], lp[MAXN];
 vector<ll> pr;
 void sieve(){

@@ -2,7 +2,6 @@
     Title: Gauss Elimination Algorithm 
     Description: Solve linear system of equations in Z_p or in R.
     Complexity: O(min(n,m) * n * m)
-
     Details: 
         - Parameters: In the system A * ans = b
             - a = (Ab), i.e., the first columns of matrix a is "A" and
@@ -17,10 +16,6 @@
             - If there are infinitely many, in the positions that I have 
             a choice, it returns 0(could be anything).
 */
-
-const double eps = 1e-9;
-const int INF = 1e9+7; 
-
 template<class T>
 int gauss (vector<vector<T>> a, vector<T> & ans) {
     int n = (int)a.size(), m = (int)a[0].size() - 1;

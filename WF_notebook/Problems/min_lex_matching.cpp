@@ -2,7 +2,6 @@
    Title: Algorithm for minimal lexicographic perfect matching
    Description: Computes the minimal lex. matching in a bip. graph
    Complexity: O(V^4 + matching)
-
    Details: We most have the adjacency of both sides.
    		Here, we are minimizaing with respect to the right side, ie, right side 
    		has the preference. One may use any mathing algorithm to compute
@@ -10,8 +9,6 @@
 
    		The proof use simmetrical difference to produce e alternating cycle (hence, 
    		perfect matching), one may have to modify a bit if the matching is not perfect.
-   
-   Solves: https://www.spoj.com/problems/FLOWERS/
 */
 
 int visu[MAXN], visv[MAXN];
