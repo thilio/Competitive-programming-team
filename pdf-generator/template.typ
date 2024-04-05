@@ -1,7 +1,7 @@
 #let project(
-  title: "",
-  authors: (),
-  date: none,
+  title: "Hoje tem 'in queue' do Ribamar",
+  authors: ("Gabriel Morete", "Lucas Harada", "Thiago Oliveira",),
+  date: datetime.today().display(),
   logo: none,
   body,
 ) = {
