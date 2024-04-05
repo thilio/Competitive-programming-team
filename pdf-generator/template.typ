@@ -16,7 +16,7 @@
     flipped: true
   )
   set text(font: "Linux Libertine", lang: "en", size: 8pt)
-  set heading(numbering: "1.1")
+  set heading(numbering: none)
 
   // Title page.
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
@@ -45,7 +45,7 @@
   pagebreak()
   show: columns.with(3, gutter: 0.7em, )
   // Table of contents.
-  outline(depth: 3, indent: true)
+  outline(depth: 2, indent: true)
 
   // Main body.
   set par(justify: true)
