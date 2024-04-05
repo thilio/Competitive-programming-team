@@ -1,49 +1,18 @@
-/*
-   Title: Manacher's Algorithm
-   Description: Finds all palidromes of a string
-   Complexity:  manacher O(|string|)
-   Details: 
-   d1[i] # of odd palindromes centered in i
-   d2[i] # of even palindromes centered in i (aab[b]aa) 
-   pal[2i] largest palindrome centered in i
-   pal[2i + 1] largest palindrome centered in i and i + 1 
-
-   total # of palindromes = d1[1] + ...+ d1[n] + d2[i] + ... + d2[n - 1]
-*/
-
-const int MAXN = 1e6 + 10;
-
-int d1[MAXN], d2[MAXN];
-int pal[2 * MAXN];
-
-void manacher(string &s){
-	int tam = s.size();
-	for (int i = 0, l = 0, r = -1; i < tam; i++){
-		int k = (i > r) ? 1 : min(d1[l + r - i], r - i + 1);
-    	while (0 <= i - k and i + k < tam and s[i - k] == s[i + k]) {
-    	    k++;
-    	}
-    	d1[i] = k--;
-    	if (i + k > r) {
-    	    l = i - k;
-		    r = i + k;
-		}
+/* Finds all palidromes of a string O(|string|)
+p[0][i] = half len of longest even palindrome (aab[b]aa) 
+p[1][i] = half len rounded down of longest odd palindrome*/
+#define rep(i, a, b) for(int i = a; i < (b); ++i)
+#define sz(x) (int)(x).size()
+array<vi, 2> manacher(const string& s) {
+	int n = sz(s);
+	array<vi,2> p = {vi(n+1), vi(n)};
+	rep(z,0,2) for (int i=0,l=0,r=0; i < n; i++) {
+		int t = r-i+!z;
+		if (i<r) p[z][i] = min(t, p[z][l+t]);
+		int L = i-p[z][i], R = i+p[z][i]-!z;
+		while (L>=1 && R+1<n && s[L-1] == s[R+1])
+			p[z][i]++, L--, R++;
+		if (R>r) l=L, r=R;
 	}
-
-	for (int i = 0, l = 0, r = -1; i < tam; i++) {
-	    int k = (i > r) ? 0 : min(d2[l + r - i + 1], r - i + 1);
-	    while (0 <= i - k - 1 and i + k < tam and s[i - k - 1] == s[i + k]) {
-	        k++;
-	    }
-	    d2[i] = k--;
-	    if (i + k > r) {
-	        l = i - k - 1;
-    		r = i + k ;
-    	}
-	}
-
-	for (int i = 0; i < tam; i++)
-		pal[2 * i] = 2 * d1[i] - 1;
-	for (int i = 0; i < tam - 1; i++)
-		pal[2 * i + 1] = 2 * d2[i + 1];
+	return p;
 }
