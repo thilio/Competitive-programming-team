@@ -11,26 +11,16 @@
    				and its negation are the same variable. For the
    				user, the variables are indexed from [1, n] and
    				its negations from [-n, -1]. To add the clause
-   				(neg x_1 or x_2), the user should call add(-1, 2)
-*/
-
-using namespace std;
-
+   				(neg x_1 or x_2), the user should call add(-1, 2)*/
 struct TWOSAT {
 	int n, c, t;
 	vector<vector<int>> adj, adjr;
 	vector<int> topo, vis, comp, value;
-
 	TWOSAT(int sz){
 		n = 2*sz;
-		adj.resize(n);
-		adjr.resize(n);
-		topo.resize(n);
-		vis.resize(n);
-		comp.resize(n);
-		value.resize(n);
+		adj.resize(n), adjr.resize(n), comp.resize(n);
+		topo.resize(n), vis.resize(n), value.resize(n);
 	}
-
 	void init(int sz){
 		n = 2*sz;
 		for(int i = 0; i < n; i++){
@@ -38,15 +28,12 @@ struct TWOSAT {
 			adj[i].clear();
 			adjr[i].clear();
 		}
-		t = 0;
-		c = 1;
+		t = 0, c = 1;
 	}
-
 	int in_to_vertex(int i){
 		if(i > 0) return (i - 1)<<1;
 		return in_to_vertex(-i) + 1;
 	}
-
 	void add(int i, int j){ // add clause (i or j)
 		int vi = in_to_vertex(i);
 		int vj = in_to_vertex(j);
@@ -69,18 +56,15 @@ struct TWOSAT {
 		add(i, -j);
 		add(-i, j);
 	}
-
 	void dfs1(int v){
 		vis[v] = 1;
 		for(auto x : adj[v]) if(vis[x] == 0) dfs1(x);
 		topo[t++] = v;
 	}	
-
 	void dfs2(int v){
 		comp[v] = c;
 		for(auto x : adjr[v]) if(comp[x] == 0) dfs2(x);
 	}
-
 	bool solve(){ // return true if the 2SAT instance has a solution
 		for(int i = 0; i < n; i++)
 			if(vis[i] == 0) dfs1(i);

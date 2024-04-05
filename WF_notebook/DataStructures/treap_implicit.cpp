@@ -4,7 +4,6 @@
     property is implicit, that is, the key is the number of nodes to its left.
     For this reason, it's very useful to handle problems where we have a array and
     need to break it into some parts, reverse it and etc. It's keys are 1-indexed
-
     Complexity: all operations are O(log size)
     Details:
         1) push(node t):
@@ -83,8 +82,6 @@ struct ImplicitTreap{
         upd_sz(t);
     }
     void push_back(T val){ merge(root, root, new item(val));};
- 
-    // Interface
     T query(int l, int r){
         node L, M, R;
         split(root, L, M, l - 1), split(M, M, R, r - l + 1);

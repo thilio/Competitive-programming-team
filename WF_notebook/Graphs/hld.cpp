@@ -8,14 +8,10 @@
 		update_subtree - O(1*DS)
 		lca - O(log(V))
 		anc - O(1)
-
-   Details: On the complexity section, DS is the compexity of the auxiliary data structure.
+   	Details: On the complexity section, DS is the compexity of the auxiliary data structure.
 	Here, things must be associative.
-
 	When dealing with HLD for edges/ifs, some indexes must be changed. Think of the edge
 	as the decendent vertex and store the values in it. HLD works on vertices.
-   
-   Credits: https://github.com/brunomaletta/Biblioteca/tree/master/Codigo/Grafos/LCA-HLD
 */
 
 const int MAXN = 4e5 + 10;

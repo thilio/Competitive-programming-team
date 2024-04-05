@@ -9,13 +9,8 @@
     Complexity: Build O(n), query O(log n), updatemin/max O(log n) amortized
     			updatesum O(log^2 n)
     Details: 0-indexed; updatemin/max makes updates (1) and (2);
-    		 updatesum make update (3); query returns {min, max, sum}
-				
-*/
-
-const int MAXN = 200200;
+    		 updatesum make update (3); query returns {min, max, sum}	*/
 const long long int llINF = 0x3f3f3f3f3f3f3f;
-
 namespace beats {
 	struct node {
 		int tam;

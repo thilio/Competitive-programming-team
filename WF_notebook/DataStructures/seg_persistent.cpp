@@ -23,7 +23,6 @@ namespace seg{
 			seg[ks] = val;
 			return ks;
 		}
-		
 		int m = (l + r)/2, ps;
 		if(pos <= m)
 			ps = update(lft[nd], l, m, pos, val), lft[ks] = ps; // DO NOT change this
@@ -41,6 +40,5 @@ namespace seg{
 		int m = (l + r)/2;
 		return oper(query(lft[nd], l, m, ql, qr), query(rgt[nd], m + 1, r, ql, qr));
 	}
-
 	int update(int l, int r, int pos, int val){ return rt = update(rt, l, r, pos, val); } // on last root
 } 
