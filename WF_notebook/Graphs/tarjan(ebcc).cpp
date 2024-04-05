@@ -8,21 +8,22 @@
 
 	Bridges separate ebcc and are the edges of the condensed graph.
 */
-
-const int MAXN = 4e5 + 10; // Graph Size
-
 int n, m, sn, clk, id;
-int pre[MAXN], lo[MAXN], stk[MAXN], ebcc[MAXN]; // ebcc[v] is the bicconected component of v
+int pre[MAXN], lo[MAXN], stk[MAXN], ebcc[MAXN], art[MAXN]; // ebcc[v] is the bicconected component of v
 vector<int> adj[MAXN], adjbcc[MAXN];
 
 void dfs_ebcc(int v, int p){
 	lo[v] = pre[v] = clk++;
 	stk[sn++] = v;
-
+	int chd = 0;
+	bool any = false;
 	for (auto x : adj[v]){
-		if (pre[x] == -1){ 
+		if (pre[x] == -1){
+			chd++;
 			dfs_ebcc(x, v); 
 			lo[v] = min(lo[v], lo[x]);
+			if (lo[x] >= pre[v])
+				any = true;
 		} 
 		else if (x != p) 
 			lo[v] = min(lo[v], pre[x]); 
@@ -35,6 +36,10 @@ void dfs_ebcc(int v, int p){
 		} while (u != v);
 		id++;
 	}
+	if (v == p and chd >= 2)
+		cut[v] = true;
+	if (v != p and any)
+		cut[v] = true;
 }
 
 int findebcc(){
