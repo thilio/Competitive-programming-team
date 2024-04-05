@@ -1,73 +1,34 @@
-/* 
-	Title: Suffix array
-	Description: Algorithm to sort the suffix of a given array(string)
-	Complexity: O(n log(n))
-	Details: It may be easily changed to handle vector<int> instead of string
+/* computes the suffix of a given string O(n log(n))
+sa[i] is the starting index of the suffix which
+is $i$'th in the sorted suffix array.
+The returned vector is of size n+1, and sa[0] = n.
+The lcp array contains longest common prefixes for
+neighbouring strings in the suffix array:
+lcp[i] = lcp(sa[i], sa[i-1]), lcp[0] = 0
+The input string must not contain any zero bytes.
 */
-
-struct suffixArray{
-	int n, len, h/*Coordinate compression and LCP*/;
-	vector<int> sa, r/*rank*/, lcp, aux, cnt;
-
-	void countingSort(vector<int> & p, int len){
-		fill(cnt.begin(), cnt.end(), 0);
-		for(int & x : p) 
-			cnt[r[x] + 1]++, x = (x - len + n) % n;
-		for(int i = 1; i < n; i++) 
-			cnt[i] += cnt[i - 1];
-		for(int x : p) 
-			aux[cnt[r[x]]++] = x;
-		p = aux;
-	}
-
-	suffixArray(string s = ""){
-		s.push_back('$'), n = s.size(), len = 1, h = 0;
-		sa.resize(n), r.resize(n), lcp.resize(n), aux.resize(n), cnt.resize(n + 1);
-		
-		// Coordinate compression
-		map<int, int> m; for(int x : s) m[x] = 1;
-		for(auto & x : m) x.second = h++;
-		for(int i = 0; i < n; i++) r[i] = m[s[i]], sa[i] = i;
-		
-		countingSort(sa, 0);
-		while(len < n){
-			countingSort(sa, len), aux[sa[0]] = 0;
-			// Build new classes
-			for(int i = 1; i < n; i++) 
-				aux[sa[i]] = aux[sa[i - 1]] + /*Not equal to previous*/\
-				(r[sa[i]] != r[sa[i - 1]] || r[(sa[i] + len)%n] != r[(sa[i - 1] + len)%n]); 
-			r = aux, len <<= 1;	
+#define rep(i, a, b) for(int i = a; i < (b); ++i)
+#define sz(x) (int)(x).size()
+struct SuffixArray {
+	vi sa, lcp; // can be used with basic_string<int>
+	SuffixArray(string& s,int lim=256){
+		int n = sz(s) + 1, k = 0, a, b;
+		vi x(all(s)+1), y(n), ws(max(n, lim)), rank(n);
+		sa = lcp = y, iota(all(sa), 0);
+		for (int j=0,p=0; p<n; j=max(1, j * 2), lim = p) {
+			p = j, iota(all(y), n - j);
+			rep(i,0,n) if (sa[i] >= j) y[p++] = sa[i] - j;
+			fill(all(ws), 0);
+			rep(i,0,n) ws[x[i]]++;
+			rep(i,1,lim) ws[i] += ws[i - 1];
+			for (int i = n; i--;) sa[--ws[x[y[i]]]] = y[i];
+			swap(x, y), p = 1, x[sa[0]] = 0;
+			rep(i,1,n) a = sa[i - 1], b = sa[i], x[b] =
+				(y[a]==y[b]&&y[a+j]==y[b+j])?p-1 : p++;
 		}
-
-		// Build LCP
-		h = 0;
-		for(int i = 0; i < n; i++){
-			if(r[i] > 0){
-				int j = sa[r[i] - 1];
-				while(s[i + h] == s[j + h]) h++;
-				lcp[r[i]] = h;
-				if(h > 0) h--;
-			}
-		}	
+		rep(i,1,n) rank[sa[i]] = i;
+		for (int i = 0, j; i < n - 1; lcp[rank[i++]] = k)
+			for (k && k--, j = sa[rank[i] - 1];
+					s[i + k] == s[j + k]; k++);
 	}
-};
-
-struct RMQ{
-    int N = 0;
-    vector<vector<int>> t;
-    inline int op(int& a, int& b) { return min(a, b); }
-    RMQ() {}
-    RMQ(vector<int>& v) : N(int(v.size())), t(__lg(N) + 1) {
-        t[0].resize(N);
-        for (int i = 0; i < N; ++i) t[0][i] = v[i];
-        for (int a = 1; a < int(t.size()); ++a) {
-            t[a].resize(N - (1 << a) + 1);
-            for (int b = 0; b + (1 << a) <= N; ++b)
-                t[a][b] = op(t[a-1][b], t[a-1][b + (1 << (a-1))]);
-        }
-    }
-    int query(int a, int b) {
-        int lg = __lg(b - a + 1);
-        return op(t[lg][a], t[lg][b - (1 << lg) + 1]);
-    }
 };
