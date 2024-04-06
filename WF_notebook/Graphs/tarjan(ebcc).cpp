@@ -1,33 +1,25 @@
-/*
-   Title: Tarjan's algorithm for edge-biconnected component (ebcc)
-   Description: Build the edge-biconnected condensation graph
-   Complexity: O(E + V)
-   
-   Details: Two vertices u and v are in the same componete if they 
-   are connected by two edge disjoint paths.(Notice, may repeat a vertex)
-
-	Bridges separate ebcc and are the edges of the condensed graph.
-*/
+/*Build the ebcc graph and finds cut vertices O(E + V)*/
 int n, m, sn, clk, id;
-int pre[MAXN], lo[MAXN], stk[MAXN], ebcc[MAXN], art[MAXN]; // ebcc[v] is the bicconected component of v
+int pre[MAXN], lo[MAXN], stk[MAXN], ebcc[MAXN], art[MAXN]; 
 vector<int> adj[MAXN], adjbcc[MAXN];
 
 void dfs_ebcc(int v, int p){
 	lo[v] = pre[v] = clk++;
 	stk[sn++] = v;
-	int chd = 0;
-	bool any = false;
+	int chd = 0, any = 0;
 	for (auto x : adj[v]){
 		if (pre[x] == -1){
 			chd++;
 			dfs_ebcc(x, v); 
 			lo[v] = min(lo[v], lo[x]);
-			if (lo[x] >= pre[v])
-				any = true;
+			if (lo[x] >= pre[v]) any = true;
 		} 
-		else if (x != p) 
-			lo[v] = min(lo[v], pre[x]); 
+		else if (x != p) lo[v] = min(lo[v], pre[x]); 
 	} 
+
+	if (v == p and chd >= 2) art[v] = true;
+	if (v != p and any) art[v] = true;
+
 	if (lo[v] == pre[v]){ 
 		int u;
 		do {
@@ -36,25 +28,14 @@ void dfs_ebcc(int v, int p){
 		} while (u != v);
 		id++;
 	}
-	if (v == p and chd >= 2)
-		cut[v] = true;
-	if (v != p and any)
-		cut[v] = true;
 }
-
-int findebcc(){
+int find_ebcc(){
 	fill(pre, pre + n + 1, -1);
+	fill(art, art + n + 1, 0);
 	sn = clk = id = 0;
-	for (int v = 0; v < n; v++) // 0 indexed
+	for (int v = 1; v <= n; v++) // 0 indexed
 		if (pre[v] == -1)
 			dfs_ebcc(v, v);
 		
 	return id;
-}
-
-void build_ebcc_graph(){ // Build ebcc condensation tree
-	for (int v = 0; v < n; v++)
-		for (auto x : adj[v])
-			if (ebcc[v] != ebcc[x])
-				adjbcc[ebcc[v]].push_back(ebcc[x]);
 }
