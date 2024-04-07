@@ -2,33 +2,22 @@ int en;
 struct trie{
 	int cnt, wrd;
 	map<char, int> m;
-	trie(){
-		cnt = 0; wrd = 0;
-		m.clear();
-	}
-	
+	trie(){ cnt = 0; wrd = 0; m.clear(); }
 }t[MAXN];
 int new_node(){
 	t[en].cnt = t[en].wrd = 0;
 	t[en].m.clear();
 	return en++;
 }
-void init(){
-	en = 0;
-	new_node();
-}
+void init(){ en = 0; new_node();}
 void add(int node, string &s, int i){ // Add string to trie
 	t[node].cnt++;
-	if(i == s.size()){
-		t[node].wrd++;
-		return;
-	}
-	if(!t[node].m.count(s[i])){
+	if(i == s.size()){t[node].wrd++; return; }
+	if(!t[node].m.count(s[i]))
 		t[node].m[s[i]] = new_node();
-	}
 	add(t[node].m[s[i]], s, i + 1);
 }
-bool remove(int node, string &s, int i){ // Return true if s was in the trie
+bool remove(int node, string &s, int i){ // true if s exist
 	if(i == s.size()){
 		if(t[node].wrd){
 			t[node].wrd--;
@@ -47,7 +36,7 @@ bool remove(int node, string &s, int i){ // Return true if s was in the trie
 	}
 	return false;
 }
-bool find(int node, string &s, int i){ // Return true if s was in the trie
+bool find(int node, string &s, int i){ //  true if s exist
 	if(i == s.size()){
 		if(t[node].wrd) return true;
 		return false;
