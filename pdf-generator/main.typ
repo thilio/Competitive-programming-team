@@ -1,5 +1,4 @@
 #import "template.typ": *
-#counter(page).update(0)
 // Change here
 #show: project.with(
   title: "Hoje tem 'in queue' do Ribamar",

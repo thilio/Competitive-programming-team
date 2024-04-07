@@ -8,8 +8,6 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(
-    // Adjust this
-    header: [USP - Hoje tem 'in queue' do Ribamar   #h(1fr)  #counter(page).display()],
     margin: (left: 12mm, right: 12mm, top: 5mm, bottom: 10mm),
     footer: none,
     numbering: none, 
@@ -41,8 +39,9 @@
     ),
   )
   v(2.4fr)
+  counter(page).update(0)
   pagebreak()
-
+  set page( header: [USP - Hoje tem 'in queue' do Ribamar   #h(1fr)  #counter(page).display()],)
   show: columns.with(3, gutter: 0.7em, )
   // Table of contents.
   outline(depth: 2, indent: true)
