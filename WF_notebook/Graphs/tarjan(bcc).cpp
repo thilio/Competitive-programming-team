@@ -1,22 +1,14 @@
-/*
-   Title: Tarjan-Hopcroft algorithm for biconnected components
-   Description: Finds the block cut tree of a graph
-   Complexity:  find_bcc O(E + V)
-  
-   Details: Builds the block cut decomposition of the tree.
+/* Finds the block cut tree of a graph O(E + V)
    The tree has at most 2m vertices.
-   First, one find the edges of a bicconected component. Then vertices. Finally 
-   the Tree.
-   The function retuns the number of blocks. Be caferul with the tree structure.
-   One may ignore parallel edges for the pourpose of fing the vertices.
-*/
-
+   Find: edges -> cut vertices -> Tree.
+   The function retuns the number of blocks. 
+   Be caferul with the tree structure.
+   One may ignore parallel edges in finding components.*/
 vector<int> adj[MAXN];
 stack<pair<int, int>> stk;
 int clk, pre[MAXN], art[MAXN], pos[MAXN], incmp[MAXN];
 vector<vector<int>> blocks, tree;
 vector<vector<pair<int, int>>> edges;
-
 int dfs_bcc(int v, int p = -1){
     int lo = pre[v] = clk++;
     for (int u : adj[v])
@@ -46,7 +38,6 @@ int dfs_bcc(int v, int p = -1){
         art[v]--;
     return lo;
 }
-
 int find_bcc(int n){
     for (int i = 0; i < n; i++){ 
         pre[i] = -1; 
@@ -88,8 +79,8 @@ int find_bcc(int n){
         for (int v : blocks[i]){
             if (!art[v]) 
                 pos[v] = i; // vertex v is in this block
-            else{
-                tree[i].push_back(pos[v]); // This articulation point connects these vertices
+            else{// v ir art and connecs these blocks
+                tree[i].push_back(pos[v]); 
                 tree[pos[v]].push_back(i);
             }
     }
