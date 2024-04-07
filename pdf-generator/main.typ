@@ -10,7 +10,7 @@
   ),
 )
 
-#counter(page).update(1)
+#counter(page).update(0)
 = Theory
 
 === Lagrange interpolating polynomial
