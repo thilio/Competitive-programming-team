@@ -1,4 +1,5 @@
 #import "template.typ": *
+#counter(page).update(0)
 // Change here
 #show: project.with(
   title: "Hoje tem 'in queue' do Ribamar",
@@ -10,7 +11,6 @@
   ),
 )
 
-#counter(page).update(0)
 = Theory
 
 === Lagrange interpolating polynomial
