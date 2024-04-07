@@ -10,8 +10,8 @@
   ),
 )
 
-= Theory
 #counter(page).update(1)
+= Theory
 
 === Lagrange interpolating polynomial
 
