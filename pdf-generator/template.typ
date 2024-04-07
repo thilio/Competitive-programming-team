@@ -40,9 +40,9 @@
       ..authors.map(author => align(start, strong(author))),
     ),
   )
-
   v(2.4fr)
   pagebreak()
+  #counter(page).update(1)
   show: columns.with(3, gutter: 0.7em, )
   // Table of contents.
   outline(depth: 2, indent: true)
