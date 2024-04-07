@@ -21,17 +21,14 @@ void stable_marriage(){
 			bool ok = 0;
 			while (!ok and p[man] < lista[man].size()){
 				wom = lista[man][p[man]++];
-				if (matchm[wom] == -1 or nota[wom][man] > nota[wom][matchm[wom]]) 
+				if (matchm[wom] == -1 or 
+					nota[wom][man] > nota[wom][matchm[wom]]) 
 					ok = 1;
 			}
-			if (!ok){
-				matchn[man] = -1;
-				man = -1;
-			}
+			if (!ok){ matchn[man] = -1; man = -1; }
 			else{
 				hubby = matchm[wom];
-				matchm[wom] = man;
-				matchn[man] = wom;
+				matchm[wom] = man; matchn[man] = wom;
 				man = hubby;
 			}
 		}
