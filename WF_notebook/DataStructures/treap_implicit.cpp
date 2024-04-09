@@ -1,35 +1,31 @@
-/*
-    Title: Implicit treap data structure
-    Description: It's a Binary tree and a heap by "prior". Hear, the key
-    property is implicit, that is, the key is the number of nodes to its left.
-    For this reason, it's very useful to handle problems where we have a array and
-    need to break it into some parts, reverse it and etc. It's keys are 1-indexed
-    Complexity: all operations are O(log size)
-    Details:
-        1) push(node t):
-            Do the push of lazy properties to t's sons
-        2) split(node t, K key, node & l, node & r):
-            Split the nodes in the subtree rooted on "t" into two:
-                - l will contain all nodes which are <= key
-                - r will contain all nodes which are > key
-        3) merge(node & t, node l, node r):
-            Merge trees "l" and "r" int one rooted on t.
-        4) push_back(T val):
-            Insert a node with "val" in the end of this tree
-        5) void erase(node & t, K key)
-            Erase the first node with key "key" that it encounters
-        6) T query(int l, int r)
-            Get the sum of all vals of nodes with keys in [l, r] (1-indexed)
-        7) int find(node t, int pos)
-            Return the val that is in position "pos" (1-indexed)
-        8) void update(int l, int r, T val, bool rev)
-            Update everyone in [l, r]. It sums "val" to everyone in 
-            this interval and also may reverse this interval.
-        
-        In general, hard Treap problems require modifying this code
-*/
+/*It's a Binary tree and a heap by "prior". Hear, the key property
+is implicit, that is, the key is the number of nodes to its left.
+For this reason, it's very useful to handle problems where we have 
+a array andn eed to break it into some parts, reverse it and etc. 
+It's keys are 1-indexed. All operations are O(log size)
+Details:
+1) push(node t):
+    Do the push of lazy properties to t's sons
+2) split(node t, K key, node & l, node & r):
+    Split the nodes in the subtree rooted on "t" into two:
+        - l will contain all nodes which are <= key
+        - r will contain all nodes which are > key
+3) merge(node & t, node l, node r):
+    Merge trees "l" and "r" int one rooted on t.
+4) push_back(T val):
+    Insert a node with "val" in the end of this tree
+5) void erase(node & t, K key)
+    Erase the first node with key "key" that it encounters
+6) T query(int l, int r)
+    Get the sum of all vals of nodes with keys in [l, r] (1-indexed)
+7) int find(node t, int pos)
+    Return the val that is in position "pos" (1-indexed)
+8) void update(int l, int r, T val, bool rev)
+    Update everyone in [l, r]. It sums "val" to everyone in 
+    this interval and also may reverse this interval.*/
 const int NEUT = 0;
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+mt19937 
+rng(chrono::steady_clock::now().time_since_epoch().count());
 template<typename T>
 struct ImplicitTreap{
     struct item {
