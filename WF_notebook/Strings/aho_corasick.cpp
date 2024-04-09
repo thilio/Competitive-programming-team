@@ -6,7 +6,7 @@ v is a node of the trie and S[v] it's associated string.
 lf[v] = lrgst proper suff of S[v] that is a pref. of a pattr
 lo[v] = lrgst proper suff of S[v] that is a ocurrence
 
-TRAVERSING THE SAILURE LINKS IS TWICE THE HGT OF THE TREE
+TRAVERSING THE FAILURE LINKS IS TWICE THE HGT OF THE TREE
 what goes down must first go up.
 Be careful with DFS when doing DP on LF and LO, use BFS*/
 int en = 1, topo[MAXN],lf[MAXN],lo[MAXN],pa[MAXN],oc[MAXN];
