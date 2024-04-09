@@ -1,7 +1,7 @@
 #import "template.typ": *
 // Change here
 #show: project.with(
-  title: "Hoje tem 'in queue' do Ribamar",
+  title: "USP - Hoje tem 'in queue' do Ribamar",
   date: datetime.today().display(),
   authors: (
     "Gabriel Morete",
