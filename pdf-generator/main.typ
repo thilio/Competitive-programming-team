@@ -50,6 +50,15 @@ ios_base::sync_with_stdio(false);
 cin.tie(NULL); cout.tie(NULL);
 
 ```
+= Makefile
+```makefile
+#CPP = -O2 -std=gnu++17 -static
+#SAN = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover
+#STL = -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2
+% : %.cpp .FORCE
+ g++ $(BOCA) $(SAN) $(STL) $<
+```
+
 = Code
 
 // Script will be used to insert code here
