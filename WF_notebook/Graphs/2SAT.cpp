@@ -1,17 +1,18 @@
 /*
-   Title: 2-Satisfability 
-   Description: Decide if a 2SAT instance has a solution,
-   				and find one when it's possible
-   Complexity:  All functions are O(1), except for init and
-   				solve which are O(n)
-   Details: 	The struct TWOSAT must be initialized (function
-   				init) before being used. The parameter size for 
-   				the builder and initialization is the number of
-   				variables of the instance, note that a variable
-   				and its negation are the same variable. For the
-   				user, the variables are indexed from [1, n] and
-   				its negations from [-n, -1]. To add the clause
-   				(neg x_1 or x_2), the user should call add(-1, 2)*/
+Title: 2-Satisfability 
+Description: Decide if a 2SAT instance has a solution,
+and find one when it's possible
+Complexity:  All functions are O(1), except for init and
+solve which are O(n)
+Details: The struct TWOSAT must be initialized (function
+init) before being used. The parameter size for 
+the builder and initialization is the number of
+variables of the instance, note that a variable
+and its negation are the same variable. For the
+user, the variables are indexed from [1, n] and
+its negations from [-n, -1]. To add the clause
+(neg x_1 or x_2), the user should call add(-1, 2)
+*/
 struct TWOSAT {
 	int n, c, t;
 	vector<vector<int>> adj, adjr;
