@@ -1,5 +1,5 @@
 #let project(
-  title: "Hoje tem 'in queue' do Ribamar",
+  title: "USP - Hoje tem 'in queue' do Ribamar",
   authors: ("Gabriel Morete", "Lucas Harada", "Thiago Oliveira",),
   date: datetime.today().display(),
   logo: none,
