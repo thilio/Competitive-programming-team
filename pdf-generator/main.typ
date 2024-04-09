@@ -20,12 +20,9 @@ $ P(x) = sum_(i=1)^(n) y_i product_(j!=i) (x-x_j) / (x_i - x_j) $
 
 === Probability
 
-#grid(
-columns: (auto, auto, auto, auto),
-rows: (auto, auto, auto, auto, auto, auto, auto, auto),
-grid.cell(Bernoulli)
-grid.cell(Binomial)
-),
+#figure(
+	image("phik.png"),
+)
 
 = Template hashing
 
