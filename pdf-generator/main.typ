@@ -56,7 +56,7 @@ cin.tie(NULL); cout.tie(NULL);
 #SAN = -fsanitize=address -fsanitize=undefined -fno-sanitize-recover
 #STL = -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2
 % : %.cpp .FORCE
- g++ $(BOCA) $(SAN) $(STL) $<
+ g++ $(CPP) $(SAN) $(STL) $<
 ```
 
 = Code
