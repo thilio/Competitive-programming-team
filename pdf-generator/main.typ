@@ -21,7 +21,11 @@ $ P(x) = sum_(i=1)^(n) y_i product_(j!=i) (x-x_j) / (x_i - x_j) $
 === Probability
 
 #figure(
-	image("phik.png"),
+  image("phik.png", width: 80%),
+  caption: [
+    A step in the molecular testing
+    pipeline of our lab.
+  ],
 )
 
 = Template hashing
